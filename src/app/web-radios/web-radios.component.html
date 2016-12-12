@@ -12,14 +12,14 @@ Add web radio
 
   <button type="submit" class="btn btn-default">Submit</button>
 
-TODO: remove this: {{newWebradio.name}}
-TODO: remove this: {{newWebradio.url}}
+
 </form>
 
 <!-- list current web radio -->
 <ul class="webradios">
   <li *ngFor="let webradio of webradios">
-    <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}}
+    <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}} 
+    <button class="destroy" (click)="deleteWebRadio(webradio)">X</button>
   </li>
 </ul>
 

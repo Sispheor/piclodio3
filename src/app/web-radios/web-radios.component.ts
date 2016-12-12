@@ -23,4 +23,11 @@ export class WebRadiosComponent implements OnInit {
     this.newWebradio = new WebRadio();
   }
 
+  deleteWebRadio(webradio){
+    console.log(webradio)
+    this.webRadioService.deleteWebRadioById(webradio.id)
+    this.webradios = this.webRadioService.getAllWebRadios();    
+  }
+  
+
 }

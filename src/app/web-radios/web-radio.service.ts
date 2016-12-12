@@ -6,7 +6,7 @@ import { WEBRADIOS } from '../mock-webradios';
 export class WebRadioService {
   // Placeholder for last id so we can simulate
   // automatic incrementing of id's
-  lastId: number = 0;
+  lastId: number = 2;
 
   // Placeholder for webradio's. We get the mock for testing
   webradios: WebRadio[] = WEBRADIOS;
@@ -24,7 +24,14 @@ export class WebRadioService {
     }
     this.webradios.push(webradio);
     return this;
-  }  
+  }
+
+  // DELETE /webradios/:id
+  deleteWebRadioById(id: number): WebRadioService {
+    this.webradios = this.webradios
+      .filter(webradio => webradio.id !== id);
+    return this;
+  }
 
 
 }
