@@ -1,0 +1,11 @@
+<h3>Rpi date</h3>
+
+{{clock | async | date:'HH:mm:ss'}}
+
+<h3>Active Web radio</h3>
+
+<ul class="webradios">
+  <li *ngFor="let active_webradio of active_webradios">
+    <span class="badge">{{active_webradio.id}}</span> {{active_webradio.name}}
+  </li>
+</ul>
