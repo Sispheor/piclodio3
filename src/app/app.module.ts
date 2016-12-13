@@ -10,13 +10,15 @@ import { HomepageComponent } from './homepage/homepage.component';
 
 import { WebRadioService } from './web-radios/web-radio.service';
 import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
+import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WebRadiosComponent,
     HomepageComponent,
-    AlarmClockComponent
+    AlarmClockComponent,
+    WebRadioFormComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,11 @@ import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
         path: 'webradios',
         component: WebRadiosComponent
       },
+      {
+        path: 'webradios/new',
+        component: WebRadioFormComponent
+      },
+      { path: 'webradios/:id', component: WebRadioFormComponent},
       {
         path: 'alarms',
         component: AlarmClockComponent

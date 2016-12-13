@@ -12,12 +12,20 @@ export class WebRadioService {
   webradios: WebRadio[] = WEBRADIOS;
 
   constructor() { }
-  // Simulate GET /webradios
+  
+  // GET /webradios
   getAllWebRadios(): WebRadio[] {
     return this.webradios;
   }
 
-  // Simulate POST /webradios
+  // GET /webradios/:id
+  getWebRadioById(id: number): WebRadio {    
+    let returnedWebRadio = this.webradios
+      .find(x => Number(x.id) === Number(id));     
+    return returnedWebRadio;
+  }
+
+  // POST /webradios
   addWebRadio(webradio: WebRadio): WebRadioService {
     if (!webradio.id) {
       webradio.id = ++this.lastId;

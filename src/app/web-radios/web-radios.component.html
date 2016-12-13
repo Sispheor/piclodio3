@@ -1,24 +1,16 @@
 <h3>My web radio</h3>
-Add web radio
-<!-- form to create a new web radio -->
-<form (ngSubmit)="onSubmit()" #webradioForm="ngForm">
-  
-  <input type="text" placeholder="name" autofocus="" id="name"
-    [(ngModel)]="newWebradio.name" name="name" 
-    required>
-  <input type="text" placeholder="URL" autofocus="" id="url"
-    [(ngModel)]="newWebradio.url" name="url"  
-    required>
 
-  <button type="submit" class="btn btn-default">Submit</button>
-
-
-</form>
+<a routerLink="/webradios/new">
+  <i class="material-icons">Add web radio</i>
+</a>
 
 <!-- list current web radio -->
 <ul class="webradios">
   <li *ngFor="let webradio of webradios">
     <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}} 
+    <a [routerLink]="['/webradios', webradio.id]">
+      <i class="material-icons">mode_edit</i>
+    </a>
     <button class="destroy" (click)="deleteWebRadio(webradio)">X</button>
   </li>
 </ul>

@@ -1,0 +1,13 @@
+<h5>Create web radio</h5>
+<!-- form to create a new web radio -->
+<form (ngSubmit)="onSubmit()" #webradioForm="ngForm">
+  
+  <input type="text" placeholder="name" autofocus="" id="name"
+    [(ngModel)]="newWebradio.name" name="name" 
+    required>
+  <input type="text" placeholder="URL" autofocus="" id="url"
+    [(ngModel)]="newWebradio.url" name="url"  
+    required>
+
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
