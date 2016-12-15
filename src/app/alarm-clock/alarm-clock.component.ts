@@ -12,18 +12,13 @@ import { WebRadioService } from '../web-radios/web-radio.service';
 export class AlarmClockComponent implements OnInit {
 
   webradios: WebRadio[] = [];
-  newAlarmClock: AlarmClock = new AlarmClock();
-
+  
   constructor(
     private webRadioService: WebRadioService
   ) { }
 
   ngOnInit() {
-    this.webradios = this.webRadioService.getAllWebRadios();     
-  }
-
-  onSubmit() { 
-    console.log(this.newAlarmClock)
+    this.webradios = this.webRadioService.getAllWebRadios();
   }
 
 

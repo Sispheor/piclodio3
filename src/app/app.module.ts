@@ -11,6 +11,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { WebRadioService } from './web-radios/web-radio.service';
 import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
 import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
+import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-for
     WebRadiosComponent,
     HomepageComponent,
     AlarmClockComponent,
-    WebRadioFormComponent
+    WebRadioFormComponent,
+    AlarmClockFormComponent
   ],
   imports: [
     BrowserModule,
