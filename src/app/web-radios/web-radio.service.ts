@@ -12,16 +12,16 @@ export class WebRadioService {
   webradios: WebRadio[] = WEBRADIOS;
 
   constructor() { }
-  
+
   // GET /webradios
   getAllWebRadios(): WebRadio[] {
     return this.webradios;
   }
 
   // GET /webradios/:id
-  getWebRadioById(id: number): WebRadio {    
+  getWebRadioById(id: number): WebRadio {
     let returnedWebRadio = this.webradios
-      .find(x => Number(x.id) === Number(id));     
+      .find(x => Number(x.id) === Number(id));
     return returnedWebRadio;
   }
 
@@ -39,6 +39,16 @@ export class WebRadioService {
     this.webradios = this.webradios
       .filter(webradio => webradio.id !== id);
     return this;
+  }
+
+  //  PUT /todos/:id
+  updateWebRadioById(id: number, values: Object = {}): WebRadio {
+    let webradio = this.getWebRadioById(id);
+    if (!webradio) {
+      return null;
+    }
+    Object.assign(webradio, values);
+    return webradio;
   }
 
 

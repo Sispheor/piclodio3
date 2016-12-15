@@ -36,12 +36,18 @@ export class WebRadioFormComponent implements OnInit {
           console.log(this.newWebradio);
         }
       });
-    
+
   }
 
   onSubmit() {
-    this.webRadioService.addWebRadio(this.newWebradio) 
-    this.newWebradio = new WebRadio();
+    // check if the id alrady exist
+    let existingWebRadio = this.webRadioService.getWebRadioById(this.newWebradio.id)
+    if (existingWebRadio){
+      this.webRadioService.updateWebRadioById(this.newWebradio.id, this.newWebradio)
+    }else{
+      this.webRadioService.addWebRadio(this.newWebradio)
+      this.newWebradio = new WebRadio();
+    }
     // return to web radio list
     this.router.navigate(["webradios"])
   }
