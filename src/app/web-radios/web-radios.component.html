@@ -7,11 +7,10 @@
 <!-- list current web radio -->
 <ul class="webradios">
   <li *ngFor="let webradio of webradios">
-    <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}} 
+    <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}}
     <a [routerLink]="['/webradios', webradio.id]">
       <i class="material-icons">mode_edit</i>
     </a>
     <button class="destroy" (click)="deleteWebRadio(webradio)">X</button>
   </li>
 </ul>
-

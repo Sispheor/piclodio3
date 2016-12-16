@@ -1,1 +1,41 @@
-working
+<br>
+<br>
+<a [routerLink]="['/alarms/new']" type="button" class="btn btn-success btn-sm">
+  <span class="glyphicon glyphicon-plus"></span>
+  New alarm
+</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Day of week<th>
+      <th>Time</th>
+      <th>Edit</th>
+      <th>Active</th>
+      <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alarmclock of alarmclocks">
+        <td>{{alarmclock.name}}</td>
+        <td>{{alarmclock.dayofweek}}</td>
+        <td>{{alarmclock.hour}}:{{alarmclock.minute}}</td>
+        <td>{{alarmclock.time}}</td>
+        <td>
+          <a href="#" type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" type="button" class="btn btn-{{ alarmclock.is_active ? 'primary' : 'default' }} btn-sm">
+              <span class="glyphicon {{ alarmclock.is_active ? 'glyphicon-check' : 'glyphicon-unchecked' }}"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" type="button" class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+</table>

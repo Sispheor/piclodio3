@@ -1,3 +1,4 @@
+import {AlarmClockService} from "./alarm-clock/alarm-clock.service";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -43,10 +44,14 @@ import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-cl
       {
         path: 'alarms',
         component: AlarmClockComponent
+      },
+      {
+        path: 'alarms/new',
+        component: AlarmClockFormComponent
       }
     ])
   ],
-  providers: [WebRadioService],
+  providers: [WebRadioService, AlarmClockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

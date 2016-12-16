@@ -1,7 +1,6 @@
+import {AlarmClockService} from "./alarm-clock.service";
 import { Component, OnInit } from '@angular/core';
 import { AlarmClock } from './alarm-clock';
-import { WebRadio } from '../web-radios/web-radio';
-import { WebRadioService } from '../web-radios/web-radio.service';
 
 
 @Component({
@@ -11,14 +10,15 @@ import { WebRadioService } from '../web-radios/web-radio.service';
 })
 export class AlarmClockComponent implements OnInit {
 
-  webradios: WebRadio[] = [];
-  
+  alarmclocks: AlarmClock[] = [];
+
   constructor(
-    private webRadioService: WebRadioService
+    private alarmClockService: AlarmClockService
   ) { }
 
   ngOnInit() {
-    this.webradios = this.webRadioService.getAllWebRadios();
+    this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
+    console.log(this.alarmclocks);
   }
 
 
