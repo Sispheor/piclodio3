@@ -9,19 +9,19 @@ import { WebRadio } from './web-radio';
 })
 export class WebRadiosComponent implements OnInit {
 
-  webradios: WebRadio[] = [];  
+  webradios: WebRadio[] = [];
 
   constructor(private webRadioService: WebRadioService) { }
 
   ngOnInit() {
-    this.webradios = this.webRadioService.getAllWebRadios();      
-  }  
+    this.webradios = this.webRadioService.getAllWebRadios();
+  }
 
   deleteWebRadio(webradio){
-    console.log(webradio)
-    this.webRadioService.deleteWebRadioById(webradio.id)
-    this.webradios = this.webRadioService.getAllWebRadios();    
+    console.log(webradio);
+    this.webRadioService.deleteWebRadioById(webradio.id);
+    this.webradios = this.webRadioService.getAllWebRadios();
   }
-  
+
 
 }

@@ -1,4 +1,4 @@
-import {DayOfWeek} from "./day-of-week";
+import {DayOfWeek} from "../day-of-week/day-of-week";
 import { WebRadio } from '../web-radios/web-radio';
 
 export class AlarmClock {
