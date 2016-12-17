@@ -13,6 +13,7 @@ import { WebRadioService } from './web-radios/web-radio.service';
 import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
 import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
 import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
+import { DayOfWeekComponent } from './day-of-week/day-of-week.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-cl
     HomepageComponent,
     AlarmClockComponent,
     WebRadioFormComponent,
-    AlarmClockFormComponent
+    AlarmClockFormComponent,
+    DayOfWeekComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Day of week<th>
+      <th>Day of week</th>
       <th>Time</th>
       <th>Edit</th>
       <th>Active</th>
@@ -17,23 +17,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let alarmclock of alarmclocks">
-        <td>{{alarmclock.name}}</td>
-        <td>{{alarmclock.dayofweek}}</td>
-        <td>{{alarmclock.hour}}:{{alarmclock.minute}}</td>
-        <td>{{alarmclock.time}}</td>
-        <td>
+        <td class="col-md-1">{{alarmclock.name}}</td>
+        <td class="col-md-1"><app-day-of-week [dayofweek]="alarmclock.dayofweek"></app-day-of-week></td>
+        <td class="col-md-1">{{alarmclock.hour}}:{{alarmclock.minute}}</td>
+        <td class="col-md-1">
           <a href="#" type="button" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-edit"></span>
           </a>
         </td>
-        <td>
+        <td class="col-md-1">
           <a href="#" type="button" class="btn btn-{{ alarmclock.is_active ? 'primary' : 'default' }} btn-sm">
-              <span class="glyphicon {{ alarmclock.is_active ? 'glyphicon-check' : 'glyphicon-unchecked' }}"></span>
+            <span class="glyphicon {{ alarmclock.is_active ? 'glyphicon-check' : 'glyphicon-unchecked' }}"></span>
           </a>
         </td>
-        <td>
+        <td class="col-md-1">
           <a href="#" type="button" class="btn btn-danger btn-sm">
-              <span class="glyphicon glyphicon-trash"></span>
+            <span class="glyphicon glyphicon-trash"></span>
           </a>
         </td>
       </tr>

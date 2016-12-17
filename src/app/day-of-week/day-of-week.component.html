@@ -1,0 +1,9 @@
+<div *ngIf="dayofweek">
+  <div class="col-xs-1"><span class="text-{{ dayofweek.monday ? 'primary' : 'muted' }}">Mo</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.tuesday ? 'primary' : 'muted' }}">Tu</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.wednesday ? 'primary' : 'muted' }}">We</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.thursday ? 'primary' : 'muted' }}">Th</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.friday ? 'primary' : 'muted' }}">Fr</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.saturday ? 'primary' : 'muted' }}">Sa</span></div>
+  <div class="col-xs-1"><span class="text-{{ dayofweek.sunday ? 'primary' : 'muted' }}">Su</span></div>
+</div>
