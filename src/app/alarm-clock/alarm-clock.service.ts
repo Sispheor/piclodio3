@@ -20,4 +20,12 @@ export class AlarmClockService {
     return this.alarmclocks;
   }
 
+  // DELETE /alarms/:id
+  deleteAlarmClockById(id: number): AlarmClockService {
+    this.alarmclocks = this.alarmclocks
+      .filter(alarmclock => alarmclock.id !== id);
+    return this;
+  }
+
+
 }

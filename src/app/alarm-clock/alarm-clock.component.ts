@@ -21,5 +21,11 @@ export class AlarmClockComponent implements OnInit {
     console.log(this.alarmclocks);
   }
 
+  deleteAlarmClock(alarmclock){
+    console.log(alarmclock)
+    this.alarmClockService.deleteAlarmClockById(alarmclock.id)
+    this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
+  }
+
 
 }
