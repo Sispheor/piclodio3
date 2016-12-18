@@ -27,5 +27,30 @@ export class AlarmClockService {
     return this;
   }
 
+  // POST /alarms/new
+  addAlarmClock(alarmClock: AlarmClock): AlarmClockService {
+    if (!alarmClock.id) {
+      alarmClock.id = ++this.lastId;
+    }
+    this.alarmclocks.push(alarmClock);
+    return this;
+  }
+
+  // GET /alarms/:id
+  getAlarmClockById(id: number): AlarmClock {
+    let returnedAlarmClock = this.alarmclocks
+      .find(x => Number(x.id) === Number(id));
+    return returnedAlarmClock;
+  }
+
+  updateAlarmClockById(id: number, values: Object = {}): AlarmClock {
+    let alarmclock = this.getAlarmClockById(id);
+    if (!alarmclock) {
+      return null;
+    }
+    Object.assign(alarmclock, values);
+    return alarmclock;
+  }
+
 
 }

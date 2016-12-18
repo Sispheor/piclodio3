@@ -4,48 +4,43 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name"
-        required
-        [(ngModel)]="newAlarmClock.name" name="name">
+      required
+      [(ngModel)]="newAlarmClock.name" name="name">
     </div>
 
     <div class="form-group">
-      <label for="hour">Hours</label>
-      <select [(ngModel)]="newAlarmClock.hour" name="hour" class="form-control" id="hour">
-        <option>00</option>
-        <option>01</option>
-        <option>02</option>
-        <option>03</option>
-      </select>
-    </div>
+      <label for="time" class="col-sm-2">Time</label>
 
-    <div class="form-group">
-      <label for="minute">Minutes</label>
-      <select [(ngModel)]="newAlarmClock.minute" name="minute" class="form-control" id="minute">
-        <option>00</option>
-        <option>01</option>
-        <option>02</option>
-        <option>03</option>
-        <option>04</option>
-        <option>05</option>
-      </select>
+      <div class="row">
+        <div class="col-xs-2">
+          <select [(ngModel)]="newAlarmClock.hour" name="hour" class="form-control" id="hour">
+            <option *ngFor="let hour of hour_list" [value]="hour">{{ hour < 10 ? '0' : '' }}{{hour}}</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <select [(ngModel)]="newAlarmClock.minute" name="minute" class="form-control" id="minute">
+            <option *ngFor="let minute of minute_list" [value]="minute">{{ minute < 10 ? '0' : '' }}{{minute}}</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="checkbox">
       <label for="is_active">
-        <input type="checkbox"> Active
+        <input [(ngModel)]="newAlarmClock.is_active" name="is_active" type="checkbox"> Active
       </label>
     </div>
 
     <div class="form-group">
       <label for="webradio">Web radio</label>
-      <select class="form-control"  id="power"
-              required
-              [(ngModel)]="newAlarmClock.webradio" name="webradio">
-        <option *ngFor="let webradio of webradios" [value]="webradio.id">{{webradio.name}}</option>
+      <select class="form-control"  id="webradio"
+        required
+        [(ngModel)]="newAlarmClock.webradio" name="webradio">
+        <option *ngFor="let webradio of webradios" [value]="webradio" >{{webradio.name}}</option>
       </select>
     </div>
 
-    <button type="submit" class="btn btn-default">Add</button>
-  </form>
+  <button type="submit" class="btn btn-primary">{{ newAlarmClock.id == null ? 'Add' : 'Update' }}</button>
+</form>
 
 </div>

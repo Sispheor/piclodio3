@@ -18,14 +18,16 @@ export class AlarmClockComponent implements OnInit {
 
   ngOnInit() {
     this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
-    console.log(this.alarmclocks);
+    // console.log(this.alarmclocks);
   }
 
   deleteAlarmClock(alarmclock){
-    console.log(alarmclock)
+    // console.log(alarmclock)
     this.alarmClockService.deleteAlarmClockById(alarmclock.id)
     this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
   }
+
+
 
 
 }

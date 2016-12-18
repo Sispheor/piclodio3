@@ -42,7 +42,8 @@ import { DayOfWeekComponent } from './day-of-week/day-of-week.component';
         path: 'webradios/new',
         component: WebRadioFormComponent
       },
-      { path: 'webradios/:id', component: WebRadioFormComponent},
+      { path: 'webradios/:id',
+       component: WebRadioFormComponent},
       {
         path: 'alarms',
         component: AlarmClockComponent
@@ -50,7 +51,11 @@ import { DayOfWeekComponent } from './day-of-week/day-of-week.component';
       {
         path: 'alarms/new',
         component: AlarmClockFormComponent
-      }
+      },
+      {
+        path: 'alarms/:id',
+        component: AlarmClockFormComponent
+      },
     ])
   ],
   providers: [WebRadioService, AlarmClockService],
