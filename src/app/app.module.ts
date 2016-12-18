@@ -33,6 +33,10 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
     HttpModule,
     RouterModule.forRoot([
       {
+        path: '',
+        component: HomepageComponent
+      },
+      {
         path: 'homepage',
         component: HomepageComponent
       },
