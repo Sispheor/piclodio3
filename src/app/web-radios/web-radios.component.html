@@ -11,6 +11,14 @@
     <a [routerLink]="['/webradios', webradio.id]">
       <i class="material-icons">mode_edit</i>
     </a>
-    <button class="destroy" (click)="deleteWebRadio(webradio)">X</button>
+    <button class="destroy" (click)="confirmDeleteWebRadio(webradio)">X</button>
   </li>
 </ul>
+
+
+<app-confirm-delete-modal
+[message]="message"
+[webradioToDelete]="webRadioToDelete"
+[modalConfirmDeleteWebRadioIsVisible]="modalConfirmDeleteWebRadioIsVisible"
+(onConfirm)="onConfirm($event)" >
+</app-confirm-delete-modal>

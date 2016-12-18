@@ -10,6 +10,9 @@ import { WebRadio } from './web-radio';
 export class WebRadiosComponent implements OnInit {
 
   webradios: WebRadio[] = [];
+  webRadioToDelete: WebRadio;
+  modalConfirmDeleteWebRadioIsVisible: Boolean = false;
+  message: String;
 
   constructor(private webRadioService: WebRadioService) { }
 
@@ -21,6 +24,21 @@ export class WebRadiosComponent implements OnInit {
     console.log(webradio);
     this.webRadioService.deleteWebRadioById(webradio.id);
     this.webradios = this.webRadioService.getAllWebRadios();
+  }
+
+  confirmDeleteWebRadio(webradio){
+      console.log("confirmDeleteWebRadio clicked");
+      this.modalConfirmDeleteWebRadioIsVisible = true;
+      this.webRadioToDelete = webradio;
+      this.message = "Are you sure you want to delete " + this.webRadioToDelete.name
+  }
+
+  onConfirm(agreed: boolean) {
+    this.modalConfirmDeleteWebRadioIsVisible = false;
+    if (agreed){
+      this.deleteWebRadio(this.webRadioToDelete);
+    }
+
   }
 
 
