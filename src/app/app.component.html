@@ -1,25 +1,18 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" routerLink="/homepage">Piclodio</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-main">
+      <ul class="nav navbar-nav">
+        <li class="nav-item" [routerLinkActive]="['active']"><a routerLink="/homepage">Homepage</a></li>
+        <li class="nav-item" [routerLinkActive]="['active']"><a routerLink="/webradios">Web radios</a></li>
+        <li class="nav-item" [routerLinkActive]="['active']"><a routerLink="/alarms">Alarms</a></li>
+      </ul>
     </div>
   </div>
 </nav>
 
-
-
-
-<h1>
- Piclodio 3
-</h1>
-
-<a routerLink="/webradios">Web radios</a>
-<a routerLink="/alarms">Alarm clock</a>
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

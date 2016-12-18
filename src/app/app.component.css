@@ -1,0 +1,4 @@
+/* prevent navbar from masking item in container */
+.container {
+  padding-top: 50px;
+}
