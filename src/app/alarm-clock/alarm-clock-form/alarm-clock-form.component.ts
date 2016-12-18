@@ -55,9 +55,10 @@ export class AlarmClockFormComponent implements OnInit {
     // check if the id alrady exist
     let existingAlarmClock = this.alarmClockService.getAlarmClockById(this.newAlarmClock.id)
     if (existingAlarmClock){
-      this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock)
+      console.log("Alarm clock already exist, updating it with val" + existingAlarmClock);
+      this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock);
     }else{
-      this.alarmClockService.addAlarmClock((this.newAlarmClock))
+      this.alarmClockService.addAlarmClock((this.newAlarmClock));
       this.newAlarmClock = new AlarmClock();
     }
     // return to web radio list

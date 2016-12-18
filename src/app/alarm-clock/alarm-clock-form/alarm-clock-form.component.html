@@ -1,5 +1,6 @@
 <div  [hidden]="submitted">
   <h1>New alarm</h1>
+  
   <form (ngSubmit)="onSubmit()" #alarmClockForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
@@ -36,7 +37,7 @@
       <select class="form-control"  id="webradio"
         required
         [(ngModel)]="newAlarmClock.webradio" name="webradio">
-        <option *ngFor="let webradio of webradios" [value]="webradio" >{{webradio.name}}</option>
+        <option *ngFor="let webradio of webradios" [ngValue]="webradio" >{{webradio.name}}</option>
       </select>
     </div>
 

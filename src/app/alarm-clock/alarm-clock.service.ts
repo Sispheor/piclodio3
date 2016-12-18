@@ -44,11 +44,14 @@ export class AlarmClockService {
   }
 
   updateAlarmClockById(id: number, values: Object = {}): AlarmClock {
+    console.log(values);
     let alarmclock = this.getAlarmClockById(id);
     if (!alarmclock) {
+      console.log("No alarm to update found with id " + id)
       return null;
     }
     Object.assign(alarmclock, values);
+      console.log(alarmclock.webradio);
     return alarmclock;
   }
 

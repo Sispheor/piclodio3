@@ -1,5 +1,8 @@
+import {WebRadio} from "./web-radios/web-radio";
 import {AlarmClock} from "./alarm-clock/alarm-clock";
+import { WEBRADIOS } from './mock-webradios';
 
+var webradios = WEBRADIOS
 // fake list of alarm-clock
 export const ALARMCLOCK: AlarmClock[] = [
   { id: 1,
@@ -16,12 +19,7 @@ export const ALARMCLOCK: AlarmClock[] = [
     hour: 7,
     minute: 30,
     is_active: true,
-    webradio: {
-      id: 1,
-      name: 'webradio1',
-      url: "http://webradio.com",
-      is_active: true
-    }
+    webradio: webradios[1]
   },
   { id: 2,
     name: "week-end",
@@ -37,12 +35,7 @@ export const ALARMCLOCK: AlarmClock[] = [
     hour: 10,
     minute: 30,
     is_active: false,
-    webradio: {
-      id: 2,
-      name: 'webradio2',
-      url: "http://webradio2.com",
-      is_active: false
-    }
+    webradio: webradios[0]
   }
 
 ];
