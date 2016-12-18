@@ -31,10 +31,17 @@
           </a>
         </td>
         <td class="col-md-1">
-          <a (click)="deleteAlarmClock(alarmclock)" type="button" class="btn btn-danger btn-sm">
+          <a (click)="confirmDeleteAlarmClock(alarmclock)" type="button" class="btn btn-danger btn-sm">
             <span class="glyphicon glyphicon-trash"></span>
           </a>
         </td>
       </tr>
     </tbody>
 </table>
+
+
+<app-confirm-delete-modal
+[message]="message"
+[modalConfirmDeleteIsVisible]="modalConfirmDeleteAlarmClockIsVisible"
+(onConfirm)="onConfirm($event)" >
+</app-confirm-delete-modal>

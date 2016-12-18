@@ -12,6 +12,10 @@ export class AlarmClockComponent implements OnInit {
 
   alarmclocks: AlarmClock[] = [];
 
+  modalConfirmDeleteAlarmClockIsVisible: Boolean = false;
+  message: String;
+  alarmClockToDelete: AlarmClock;
+
   constructor(
     private alarmClockService: AlarmClockService
   ) { }
@@ -25,6 +29,20 @@ export class AlarmClockComponent implements OnInit {
     // console.log(alarmclock)
     this.alarmClockService.deleteAlarmClockById(alarmclock.id)
     this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
+  }
+
+  confirmDeleteAlarmClock(alarmclock: AlarmClock){
+      console.log("confirmDeleteAlarmClock clicked");
+      this.modalConfirmDeleteAlarmClockIsVisible = true;
+      this.alarmClockToDelete = alarmclock;
+      this.message = "Are you sure you want to delete the alarm \"" + this.alarmClockToDelete.name + "\""
+  }
+
+  onConfirm(agreed: boolean) {
+    this.modalConfirmDeleteAlarmClockIsVisible = false;
+    if (agreed){
+      this.deleteAlarmClock(this.alarmClockToDelete);
+    }
   }
 
 

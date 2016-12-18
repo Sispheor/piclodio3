@@ -9,8 +9,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 export class ConfirmDeleteModalComponent {
 
   @Input() message: String;
-  @Input() webradioToDelete: WebRadio;
-  @Input() modalConfirmDeleteWebRadioIsVisible: Boolean;
+  @Input() modalConfirmDeleteIsVisible: Boolean;
   @Output() onConfirm = new EventEmitter<boolean>();
 
   constructor() { }
@@ -20,12 +19,12 @@ export class ConfirmDeleteModalComponent {
   }
 
   canceldeleteWebRadio(){
-    this.modalConfirmDeleteWebRadioIsVisible = false;
+    this.modalConfirmDeleteIsVisible = false;
     this.onConfirm.emit(false);
   }
 
   confirmDeleteWebRadio(){
-    this.modalConfirmDeleteWebRadioIsVisible = false;
+    this.modalConfirmDeleteIsVisible = false;
     this.onConfirm.emit(true);
 
   }
