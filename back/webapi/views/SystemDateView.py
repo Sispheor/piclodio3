@@ -1,4 +1,3 @@
-import json
 from time import strftime
 
 from rest_framework.permissions import AllowAny
@@ -12,6 +11,5 @@ class SystemDateList(APIView):
     def get(self, request, format=None):
         # get the local system date
         clock = strftime("%Y-%m-%dT%H:%M:%S")
-        print clock
 
         return Response(str(clock))
