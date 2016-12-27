@@ -101,18 +101,24 @@ curl -H "Content-Type: application/json" -X PUT -d  '{"id": 4, "name": "new name
 
 **Model detail**
 
-| Parameter | Type      | Choices | Description                                                      |
-|-----------|-----------|---------|------------------------------------------------------------------|
-| id        | integer   |         | The unique ID of the object                                      |
-| name      | string    |         | Name of the alarm                                                |
-| dayofweek | DayOfWeek |         | DayOfWeek object                                                 |
-| hour      | integer   |         | Hour when the alarm will be scheduled. Must be in range [0:23]   |
-| minute    | integer   |         | Minute when the alarm will be scheduled. Must be in range [0:59] |
-| is_active | boolean   |         | If set, the alarm is active. Else the alarm is disabled.         |
-| webradio  | integer   |         | WebRadio object                                                  |
+| Parameter | Type    | Choices     | Description                                                             |
+|-----------|---------|-------------|-------------------------------------------------------------------------|
+| id        | integer |             | The unique ID of the object                                             |
+| name      | string  |             | Name of the alarm                                                       |
+| monday    | boolean | true, false | If set, the alarm will be triggered every monday at the selected time   |
+| tuesday   | boolean | true, false | If set, the alarm will be triggered every tuesday at the selected time  |
+| wednesday | boolean | true, false | If set, the alarm will be triggered every wednesdayat the selected time |
+| thursday  | boolean | true, false | If set, the alarm will be triggered every thursdayat the selected time  |
+| friday    | boolean | true, false | If set, the alarm will be triggered every friday at the selected time   |
+| saturday  | boolean | true, false | If set, the alarm will be triggered every saturdayat the selected time  |
+| sunday    | boolean | true, false | If set, the alarm will be triggered every sunday at the selected time   |
+| hour      | integer |             | Hour when the alarm will be scheduled. Must be in range [0:23]          |
+| minute    | integer |             | Minute when the alarm will be scheduled. Must be in range [0:59]        |
+| is_active | boolean | true, false | If set, the alarm is active. Else the alarm is disabled.                |
+| webradio  | integer |             | WebRadio object                                                         |
 
 ### **GET** /alarms/
-Get a list all available web radio.
+Get a list all available alarms.
 
 #### Example call
 ```
@@ -125,46 +131,122 @@ curl -X GET http://127.0.0.1:8000/alarms/
     {
         "id": 3,
         "name": "week end",
-        "dayofweek": {
-            "monday": false,
-            "tuesday": false,
-            "wednesday": false,
-            "thursday": false,
-            "friday": false,
-            "saturday": true,
-            "sunday": true
-        },
+        "monday": false,
+        "tuesday": false,
+        "wednesday": false,
+        "thursday": false,
+        "friday": false,
+        "saturday": true,
+        "sunday": true,
         "hour": 10,
         "minute": 30,
         "is_active": false,
-        "webradio": {
-            "id": 5,
-            "name": "my name",
-            "url": "http://mydomain.example.com",
-            "is_default": false
-        }
+        "webradio": 5
     },
     {
         "id": 4,
         "name": "work",
-        "dayofweek": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-        },
+        "monday": true,
+        "tuesday": true,
+        "wednesday": true,
+        "thursday": true,
+        "friday": true,
+        "saturday": false,
+        "sunday": false,
         "hour": 7,
         "minute": 30,
         "is_active": true,
-        "webradio": {
-            "id": 4,
-            "name": "new name",
-            "url": "http://mydomain.example.com",
-            "is_default": false
-        }
+        "webradio": 4
     }
 ]
+```
+
+### **GET** /alarms/{alarmclock_id}
+Get a details about an alarm by its ID.
+
+#### Example call
+```
+curl -X GET http://127.0.0.1:8000/alarms/3
+```
+
+#### Example answer
+```
+{
+    "id": 3,
+    "name": "test",
+    "monday": true,
+    "tuesday": false,
+    "wednesday": false,
+    "thursday": false,
+    "friday": false,
+    "saturday": false,
+    "sunday": false,
+    "hour": 12,
+    "minute": 12,
+    "is_active": false,
+    "webradio": 5
+}
+```
+
+### **DELETE** /alarms/{alarmclock_id}
+Delete an alarm
+
+#### Example call
+```
+curl -H "Content-Type: application/json" -X DELETE http://127.0.0.1:8000/alarms/3/
+```
+
+
+### **POST** /alarms/
+Create a new alarm.
+
+#### Example call
+```
+curl -H "Content-Type: application/json" -X POST -d '{"name": "work", "monday": true, "tuesday": true, "wednesday": true, "thursday": true, "friday": true, "saturday": true, "sunday": true, "hour": 7, "minute": 30, "is_active": true, "webradio": 5}' http://127.0.0.1:8000/alarm/
+```
+
+#### Example answer
+```
+{
+	"id": 7,
+	"name": "work",
+	"monday": true,
+	"tuesday": true,
+	"wednesday": true,
+	"thursday": true,
+	"friday": true,
+	"saturday": true,
+	"sunday": true,
+	"hour": 7,
+	"minute": 30,
+	"is_active": true,
+	"webradio": 5
+}
+```
+
+### **PUT** /alarms/{alarmclock_id}
+Update an alarm.
+
+#### Example call
+```
+curl -H "Content-Type: application/json" -X PUT -d '{"name": "renamed", "monday": true, "tuesday": true, "wednesday": true, "thursday": true, "friday": true, "saturday": true, "sunday": true, "hour": 7, "minute": 30, "is_active": true, "webradio": 5}' http://127.0.0.1:8000/alarms/7/
+```
+
+#### Example answer
+```
+{
+	"id": 7,
+	"name": "work",
+	"monday": true,
+	"tuesday": true,
+	"wednesday": true,
+	"thursday": true,
+	"friday": true,
+	"saturday": true,
+	"sunday": true,
+	"hour": 7,
+	"minute": 30,
+	"is_active": true,
+	"webradio": 5
+}
 ```

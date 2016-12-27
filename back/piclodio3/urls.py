@@ -34,4 +34,5 @@ urlpatterns = [
     url(r'^webradio/(?P<pk>[0-9]+)/$', WebRadioView.WebRadioDetail.as_view()),
 
     url(r'^alarms/$', AlarmClockView.AlarmClockList.as_view()),
+    url(r'^alarms/(?P<pk>[0-9]+)/$', AlarmClockView.AlarmClockDetail.as_view()),
 ]

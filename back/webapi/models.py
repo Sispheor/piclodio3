@@ -11,7 +11,8 @@ class WebRadio(models.Model):
     is_default = models.BooleanField(default=False)
 
 
-class DayOfWeek(models.Model):
+class AlarmClock(models.Model):
+    name = models.CharField(max_length=250)
     monday = models.BooleanField(default=False)
     tuesday = models.BooleanField(default=False)
     wednesday = models.BooleanField(default=False)
@@ -19,11 +20,6 @@ class DayOfWeek(models.Model):
     friday = models.BooleanField(default=False)
     saturday = models.BooleanField(default=False)
     sunday = models.BooleanField(default=False)
-
-
-class AlarmClock(models.Model):
-    name = models.CharField(max_length=250)
-    dayofweek = models.ForeignKey(DayOfWeek, on_delete=models.CASCADE)
     hour = models.IntegerField()
     minute = models.IntegerField()
     is_active = models.BooleanField(default=False)
