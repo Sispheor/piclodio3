@@ -18,7 +18,16 @@
     <tbody>
       <tr *ngFor="let alarmclock of alarmclocks">
         <td class="col-md-1">{{alarmclock.name}}</td>
-        <td class="col-md-1"><app-day-of-week [dayofweek]="alarmclock.dayofweek"></app-day-of-week></td>
+        <td class="col-md-1">
+          <div class="col-xs-1"><span class="text-{{ monday ? 'primary' : 'muted' }}">Mo</span></div>
+          <div class="col-xs-1"><span class="text-{{ tuesday ? 'primary' : 'muted' }}">Tu</span></div>
+          <div class="col-xs-1"><span class="text-{{ wednesday ? 'primary' : 'muted' }}">We</span></div>
+          <div class="col-xs-1"><span class="text-{{ thursday ? 'primary' : 'muted' }}">Th</span></div>
+          <div class="col-xs-1"><span class="text-{{ friday ? 'primary' : 'muted' }}">Fr</span></div>
+          <div class="col-xs-1"><span class="text-{{ saturday ? 'primary' : 'muted' }}">Sa</span></div>
+          <div class="col-xs-1"><span class="text-{{ sunday ? 'primary' : 'muted' }}">Su</span></div>
+
+        </td>
         <td class="col-md-1">{{alarmclock.hour}}:{{alarmclock.minute}}</td>
         <td class="col-md-1">
           <a [routerLink]="['/alarms', alarmclock.id]" type="button" class="btn btn-default btn-sm">

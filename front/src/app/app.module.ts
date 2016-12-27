@@ -1,3 +1,5 @@
+import "rxjs/add/operator/map";
+import { SystemDateService } from './homepage/systemdate.service';
 import {AlarmClockService} from "./alarm-clock/alarm-clock.service";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +15,6 @@ import { WebRadioService } from './web-radios/web-radio.service';
 import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
 import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
 import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
-import { DayOfWeekComponent } from './day-of-week/day-of-week.component';
 import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-delete-modal.component';
 
 @NgModule({
@@ -24,7 +25,6 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
     AlarmClockComponent,
     WebRadioFormComponent,
     AlarmClockFormComponent,
-    DayOfWeekComponent,
     ConfirmDeleteModalComponent
   ],
   imports: [
@@ -64,7 +64,7 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
       },
     ])
   ],
-  providers: [WebRadioService, AlarmClockService],
+  providers: [WebRadioService, AlarmClockService, SystemDateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

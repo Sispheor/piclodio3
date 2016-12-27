@@ -20,6 +20,7 @@ from rest_framework import routers
 # Routers provide an easy way of automatically determining the URL conf.
 from webapi.views import WebRadioView
 from webapi.views import AlarmClockView
+from webapi.views import SystemDateView
 
 router = routers.DefaultRouter()
 
@@ -35,4 +36,6 @@ urlpatterns = [
 
     url(r'^alarms/$', AlarmClockView.AlarmClockList.as_view()),
     url(r'^alarms/(?P<pk>[0-9]+)/$', AlarmClockView.AlarmClockDetail.as_view()),
+
+    url(r'^systemdate/$', SystemDateView.SystemDateList.as_view()),
 ]

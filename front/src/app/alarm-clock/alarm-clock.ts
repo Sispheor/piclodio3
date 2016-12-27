@@ -1,10 +1,15 @@
-import {DayOfWeek} from "../day-of-week/day-of-week";
 import { WebRadio } from '../web-radios/web-radio';
 
 export class AlarmClock {
     id: number;
     name: string = '';
-    dayofweek: DayOfWeek;
+    monday: boolean  = false;
+    tuesday: boolean  = false;
+    wednesday: boolean  = false;
+    thursday: boolean  = false;
+    friday: boolean  = false;
+    saturday: boolean  = false;
+    sunday: boolean  = false;
     hour: number;
     minute: number;
     is_active: boolean = false;

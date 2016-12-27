@@ -10,6 +10,7 @@ Install the framwork
 ```
 sudo pip install Django==1.10.4
 sudo pip install djangorestframework==3.5.3
+sudo pip install django-cors-headers==1.3.1
 ```
 
 
