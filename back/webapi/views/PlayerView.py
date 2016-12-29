@@ -8,9 +8,8 @@ from webapi.serializers.PlayerSerializer import PlayerManagerSerializer
 
 class PlayerStatus(APIView):
     permission_classes = (AllowAny,)
-    # serializer_class = PlayerManagerSerializer
 
-    def get(self, request, format=None):
+    def get(self, request):
         """
         Get the Mplayer status
         """
@@ -24,19 +23,27 @@ class PlayerStatus(APIView):
         }
         return Response(answer)
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = PlayerManagerSerializer(data=request.data)
 
         if serializer.is_valid():
             new_status = serializer.validated_data["status"]
             if new_status == "on":
+                # give a web radio to play is optional
                 if "webradio" in serializer.validated_data:
                     webradio = serializer.validated_data["webradio"]
                     url_to_play = webradio.url
                 else:
-                    # get the default web radio
-                    default_web_radio = WebRadio.objects.get(is_default=True)
-                    url_to_play = default_web_radio.url
+                    # get the default web radio if exist
+                    try:
+                        default_web_radio = WebRadio.objects.get(is_default=True)
+                        url_to_play = default_web_radio.url
+                    except WebRadio.DoesNotExist:
+                        # No default web radio
+                        answer = {
+                            "status": "error, no default web radio"
+                        }
+                        return Response(answer, status=status.HTTP_400_BAD_REQUEST)
 
                 Player.play(url_to_play)
                 returned_status = "on"

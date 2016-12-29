@@ -32,13 +32,13 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # piclodio URLs
-    url(r'^webradio/$', WebRadioView.WebRadioList.as_view()),
-    url(r'^webradio/(?P<pk>[0-9]+)/$', WebRadioView.WebRadioDetail.as_view()),
+    url(r'^webradio/?$', WebRadioView.WebRadioList.as_view()),
+    url(r'^webradio/(?P<pk>[0-9]+)/?$', WebRadioView.WebRadioDetail.as_view()),
 
     url(r'^alarms/$', AlarmClockView.AlarmClockList.as_view()),
-    url(r'^alarms/(?P<pk>[0-9]+)/$', AlarmClockView.AlarmClockDetail.as_view()),
+    url(r'^alarms/(?P<pk>[0-9]+)/?$', AlarmClockView.AlarmClockDetail.as_view()),
 
-    url(r'^systemdate/$', SystemDateView.SystemDateList.as_view()),
-    url(r'^player/$', PlayerView.PlayerStatus.as_view()),
+    url(r'^systemdate/?$', SystemDateView.SystemDateList.as_view()),
+    url(r'^player/?$', PlayerView.PlayerStatus.as_view()),
 
 ]

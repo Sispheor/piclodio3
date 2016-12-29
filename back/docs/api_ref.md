@@ -250,3 +250,29 @@ curl -H "Content-Type: application/json" -X PUT -d '{"name": "renamed", "monday"
 	"webradio": 5
 }
 ```
+
+## Player management
+
+**Model detail**
+
+| Parameter | Type    | Choices | Description                                                                             |
+|-----------|---------|---------|-----------------------------------------------------------------------------------------|
+| status    | string  | on, off | Start or stop the player.                                                               |
+| webradio  | integer |         | Primary key of the WebRadio object to start. If not set, the efault webradio is started |
+
+> **Note**. The web radio field is not required. When switching the status to "on", if a no web radio is set, the default one is launched.
+
+### **Get** /player
+Get the status on the player. If Mplayer is running, the status is "on". Else the status is "off"
+
+#### Example call
+```
+curl -X GET http://127.0.0.1:8000/player/
+```
+
+#### Example answer
+```
+{
+    "status":"off"
+}
+```
