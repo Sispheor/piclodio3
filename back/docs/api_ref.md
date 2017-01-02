@@ -276,3 +276,42 @@ curl -X GET http://127.0.0.1:8000/player/
     "status":"off"
 }
 ```
+
+## Backup MP3 management
+
+**Model detail**
+
+| Parameter   | Type | Choices | Description                                                              |
+|-------------|------|---------|--------------------------------------------------------------------------|
+| backup_file | file |         | The MP3 backup file that will be lanched id the web radio doesn't answer |
+
+### **Get** /backup
+Get the name of the current backup MP3 file.
+
+#### Example call
+```
+curl -X GET http://127.0.0.1:8000/backup/
+```
+
+#### Example answer
+```
+{
+    "id": 1,
+    "backup_file": "backup.mp3"
+}
+```
+
+### **post** /backup
+Send a new backup file. The new one will replace the last one if exist
+
+#### Example call
+```
+curl -X POST -F "backup_file=@/home/nico/Desktop/backup.mp3" http://127.0.0.1:8000/backup
+```
+
+#### Example answer
+```
+{
+    "backup_file":"backup_mp3/backup.mp3"
+}
+```

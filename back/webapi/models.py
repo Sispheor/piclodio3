@@ -28,6 +28,10 @@ class AlarmClock(models.Model):
     webradio = models.ForeignKey(WebRadio)
 
 
+class BackupMusic(models.Model):
+    backup_file = models.FileField(upload_to="backup_mp3")
+
+
 class Player(object):
     """
     Class to play music with mplayer

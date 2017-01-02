@@ -18,6 +18,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 # Routers provide an easy way of automatically determining the URL conf.
+from webapi.views import BackupFileView
 from webapi.views import PlayerView
 from webapi.views import WebRadioView
 from webapi.views import AlarmClockView
@@ -40,5 +41,7 @@ urlpatterns = [
 
     url(r'^systemdate/?$', SystemDateView.SystemDateList.as_view()),
     url(r'^player/?$', PlayerView.PlayerStatus.as_view()),
+
+    url(r'^backup/?$', BackupFileView.BackupFileView.as_view()),
 
 ]
