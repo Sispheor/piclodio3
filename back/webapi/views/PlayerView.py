@@ -2,7 +2,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from webapi.models import Player, WebRadio
+
+from webapi.PlayerManager import PlayerManager
+from webapi.models import WebRadio
 from webapi.serializers.PlayerSerializer import PlayerManagerSerializer
 
 
@@ -13,7 +15,7 @@ class PlayerStatus(APIView):
         """
         Get the Mplayer status
         """
-        if Player.is_started():
+        if PlayerManager.is_started():
             status = "on"
         else:
             status = "off"
@@ -45,10 +47,10 @@ class PlayerStatus(APIView):
                         }
                         return Response(answer, status=status.HTTP_400_BAD_REQUEST)
 
-                Player.play(url_to_play)
+                PlayerManager.play(url_to_play)
                 returned_status = "on"
             else:
-                Player.stop()
+                PlayerManager.stop()
                 returned_status = "off"
 
             answer = {

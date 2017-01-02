@@ -23,11 +23,15 @@ from django.test import TestCase
 # test remove
 # test = "piclodio 2"
 # CrontabManager.remove_job(test)
+from webapi.PlayerManager import PlayerManager
+# from webapi.models import AlarmClock, BackupMusic
 
+# all_jobs = BackupMusic.objects.all()
+#
+# for el in all_jobs:
+#     el.delete()
 
-from webapi.models import AlarmClock
+url = "http://192.99.17.12:6410/"
 
-all_jobs = AlarmClock.objects.all()
+PlayerManager.stop()
 
-for el in all_jobs:
-    el.delete()

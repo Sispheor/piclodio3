@@ -267,15 +267,32 @@ Get the status on the player. If Mplayer is running, the status is "on". Else th
 
 #### Example call
 ```
-curl -X GET http://127.0.0.1:8000/player/
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/player/
 ```
 
 #### Example answer
 ```
 {
-    "status":"off"
+    "status":"on"
 }
 ```
+
+### **POST** /player
+Run a web radio
+
+#### Example call
+```
+curl -X POST -H "Content-Type: application/json" -d '{"status": "on", "webradio": 5}' http://127.0.0.1:8000/player/
+```
+
+#### Example answer
+```
+{
+    "status":"on"
+}
+```
+
+
 
 ## Backup MP3 management
 
