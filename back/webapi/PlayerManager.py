@@ -23,8 +23,10 @@ class PlayerManager(object):
         print("Mplayer cmd: %s" % str(mplayer_command))
 
         fnull = open(os.devnull, 'w')
-        subprocess.Popen(mplayer_command, stdout=fnull, stderr=fnull)
-
+        # subprocess.Popen(mplayer_command, stdout=fnull, stderr=fnull)
+        # blocking thread
+        p = subprocess.Popen(mplayer_command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p.communicate()
 
     @classmethod
     def stop(cls):

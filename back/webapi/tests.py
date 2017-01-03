@@ -1,3 +1,5 @@
+from time import sleep
+
 from django.test import TestCase
 
 # from webapi.CrontabManager import CrontabManager
@@ -31,7 +33,42 @@ from webapi.PlayerManager import PlayerManager
 # for el in all_jobs:
 #     el.delete()
 
-url = "http://192.99.17.12:6410/"
+# url = "http://192.99.17.12:6410/"
+#
+# PlayerManager.stop()
 
+import threading
+
+
+class Command(object):
+    def __init__(self, callback_function):
+        self.callback_function = callback_function
+
+    def run(self, timeout):
+        def target():
+            print 'Thread started'
+            self.callback_function()
+            print 'Thread finished'
+
+        thread = threading.Thread(target=target)
+        thread.start()
+        print "Wait %s seconds before checking is the thread is alive" % timeout
+        thread.join(timeout)
+        if thread.is_alive():
+            print 'Thread is alive'
+            # thread.join()
+
+
+def callback():
+    url = "http://192.99.17.12:6410/"
+    PlayerManager.play(url)
+
+command = Command(callback_function=callback)
+command.run(timeout=3)
+
+
+print "wait 5 sec"
+sleep(5)
+print "kill player"
 PlayerManager.stop()
 
