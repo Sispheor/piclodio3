@@ -40,35 +40,68 @@ from webapi.PlayerManager import PlayerManager
 import threading
 
 
-class Command(object):
-    def __init__(self, callback_function):
-        self.callback_function = callback_function
+class ThreadTimeout(object):
+    def __init__(self, callback_instance, backup_instance, timeout):
+        self.callback_instance = callback_instance
+        self.backup_instance = backup_instance
+        self.timeout = timeout
+        self.main_thread = None
 
-    def run(self, timeout):
+    def run(self):
         def target():
             print 'Thread started'
-            self.callback_function()
+            self.callback_instance.start()
             print 'Thread finished'
 
-        thread = threading.Thread(target=target)
-        thread.start()
-        print "Wait %s seconds before checking is the thread is alive" % timeout
-        thread.join(timeout)
-        if thread.is_alive():
-            print 'Thread is alive'
-            # thread.join()
+        def waiting_target():
+            print "Wait %s seconds before checking is the thread is alive" % self.timeout
+            sleep(self.timeout)
+            if self.main_thread.is_alive():
+                print 'Thread is alive'
+                # thread.join()
+            else:
+                print 'Thread is dead'
+                if self.backup_instance is not None:
+                    print "Playing backup file"
+                    self.backup_instance.start()
+                else:
+                    print "Not backup file provided"
+
+        # start a thread to play the webradio
+        self.main_thread = threading.Thread(target=target)
+        self.main_thread.start()
+
+        # start a thread that will check that the first thread is alive
+        thread_waiting = threading.Thread(target=waiting_target)
+        thread_waiting.start()
 
 
-def callback():
-    url = "http://192.99.17.12:6410/"
-    PlayerManager.play(url)
 
-command = Command(callback_function=callback)
-command.run(timeout=3)
+class CallbackPlayer(object):
+    def __init__(self, url=None):
+        self.url = url
+
+    def start(self):
+        PlayerManager.play(self.url)
 
 
-print "wait 5 sec"
-sleep(5)
-print "kill player"
-PlayerManager.stop()
+# working url
+url = "http://192.99.17.12:6410/"
+
+# not working url
+#url = "http://192.99.17.10:6410/"
+backup_mp3 = "/home/nico/Desktop/mpthreetest.mp3"
+
+url_player = CallbackPlayer(url=url)
+backup_mp3player = CallbackPlayer(url=backup_mp3)
+
+
+command = ThreadTimeout(callback_instance=url_player, backup_instance=backup_mp3player, timeout=45)
+command.run()
+
+
+# print "wait 5 sec"
+# sleep(5)
+# print "kill player"
+# PlayerManager.stop()
 

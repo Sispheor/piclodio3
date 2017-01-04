@@ -27,6 +27,7 @@ class PlayerManager(object):
         # blocking thread
         p = subprocess.Popen(mplayer_command, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         p.communicate()
+        print "Mplayer stopped"
 
     @classmethod
     def stop(cls):
