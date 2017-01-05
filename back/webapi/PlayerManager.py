@@ -54,24 +54,23 @@ class PlayerManager(object):
 
 
 class ThreadTimeout(object):
-    def __init__(self, callback_instance, backup_instance, timeout):
+    def __init__(self, callback_instance, backup_instance, timeout, time_before_auto_kill=None):
         self.callback_instance = callback_instance
         self.backup_instance = backup_instance
         self.timeout = timeout
         self.main_thread = None
+        self.time_before_auto_kill = int(time_before_auto_kill)
 
     def run(self):
-        def target():
-            print 'Thread started'
+        def play_webradio_thread():
+            print 'Starting the web radio player thread'
             self.callback_instance.start()
-            print 'Thread finished'
 
-        def waiting_target():
+        def check_webradio_is_running_thread():
             print "Wait %s seconds before checking if the thread is alive" % self.timeout
             sleep(self.timeout)
             if self.main_thread.is_alive():
                 print 'Thread is alive'
-                # thread.join()
             else:
                 print 'Thread is dead'
                 if self.backup_instance is not None:
@@ -80,13 +79,23 @@ class ThreadTimeout(object):
                 else:
                     print "Not backup file provided"
 
-        # start a thread to play the webradio
-        self.main_thread = threading.Thread(target=target)
+        def auto_kill_thread():
+            print "Auto kill thread started, will stop the web radio in %s minutes" % self.time_before_auto_kill
+            sleep(self.time_before_auto_kill*60)
+            PlayerManager.stop()
+
+        # start a thread to play the web radio
+        self.main_thread = threading.Thread(target=play_webradio_thread)
         self.main_thread.start()
 
         # start a thread that will check that the first thread is alive
-        thread_waiting = threading.Thread(target=waiting_target)
+        thread_waiting = threading.Thread(target=check_webradio_is_running_thread)
         thread_waiting.start()
+
+        # start a thread for auto kill
+        if self.time_before_auto_kill is not None:
+            thread_auto_kill = threading.Thread(target=auto_kill_thread)
+            thread_auto_kill.start()
 
 
 class CallbackPlayer(object):
