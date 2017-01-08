@@ -15,9 +15,10 @@ class AlarmClockSerializer(serializers.ModelSerializer):
     hour = serializers.IntegerField(min_value=0, max_value=23)
     minute = serializers.IntegerField(min_value=0, max_value=59)
     is_active = serializers.BooleanField(default=False)
+    auto_stop_minutes = serializers.IntegerField(min_value=0, max_value=200)
     webradio = serializers.PrimaryKeyRelatedField(queryset=WebRadio.objects.all())
 
     class Meta:
         model = AlarmClock
         fields = ('id', 'name', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'hour',
-                  'minute', 'is_active', 'webradio')
+                  'minute', 'auto_stop_minutes', 'is_active', 'webradio')

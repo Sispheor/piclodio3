@@ -23,6 +23,7 @@ class AlarmClock(models.Model):
     hour = models.IntegerField()
     minute = models.IntegerField()
     is_active = models.BooleanField(default=False)
+    auto_stop_minutes = models.IntegerField(default=0)
     webradio = models.ForeignKey(WebRadio)
 
 

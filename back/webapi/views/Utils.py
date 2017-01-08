@@ -1,3 +1,6 @@
+import inspect
+import os
+
 from webapi.CrontabManager import CrontabManager
 
 
@@ -8,11 +11,28 @@ def add_job_in_crontab(alarm):
     :return:
     """
     day_of_week = _get_day_of_week(alarm)
-    new_job = "%s %s * * %s echo test # piclodio%s" % (alarm.minute, alarm.hour, day_of_week, alarm.id)
+    current_script_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
+    run_script_path = get_root_path(current_script_path) + os.sep + "run_web_radio.py"
+
+    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <webradio_id>
+    new_job = "%s %s * * %s python %s %s " % (alarm.minute,
+                                              alarm.hour,
+                                              day_of_week,
+                                              run_script_path,
+                                              alarm.webradio.id)
+    if alarm.auto_stop_minutes is not 0:
+        # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> <auto_stop_minute>
+        new_job += "%s " % alarm.auto_stop_minutes
+
+    # new_job: <minute> <hour> * * <day_of_week> <run_script_path> <alarm_id> [<auto_stop_minute>] # piclodio<alarm_id>
+    new_job += "# piclodio%s" % alarm.id
+
     if not alarm.is_active:
         line = "# "
         new_job = line + new_job
-    print new_job
+
+    print "Crontab job line: %s" % new_job
     CrontabManager.add_job(new_job)
 
 
@@ -49,3 +69,13 @@ def _get_day_of_week(alarm):
         returned_period = add_el(returned_period, "6")
 
     return returned_period
+
+
+def get_root_path(current_script_path):
+    """
+    Return the root path of the project
+    :param current_script_path:
+    :return:
+    """
+    parent_path = os.path.normpath(current_script_path + os.sep + os.pardir + os.sep + os.pardir)
+    return parent_path

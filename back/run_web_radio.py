@@ -1,3 +1,10 @@
+"""
+This script is used to start a web radio from its database ID passed as argument.
+The script can also handle the automatic stop with a second argument.
+
+How to use: python run_web_radio.py <id_web_radio> [<minutes_before_auto_stop>]
+E.g: python run_web_radio.py 12 20
+"""
 import os
 import sys
 import django
@@ -47,7 +54,3 @@ command = ThreadTimeout(callback_instance=web_radio_callback,
                         timeout=5,
                         time_before_auto_kill=minute_before_auto_kill)
 command.run()
-
-
-
-
