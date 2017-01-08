@@ -59,7 +59,10 @@ class ThreadTimeout(object):
         self.backup_instance = backup_instance
         self.timeout = timeout
         self.main_thread = None
-        self.time_before_auto_kill = int(time_before_auto_kill)
+        if time_before_auto_kill is not None:
+            self.time_before_auto_kill = int(time_before_auto_kill)
+        else:
+            self.time_before_auto_kill = None
 
     def run(self):
         def play_webradio_thread():
