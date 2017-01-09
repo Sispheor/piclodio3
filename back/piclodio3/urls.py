@@ -20,6 +20,7 @@ from rest_framework import routers
 # Routers provide an easy way of automatically determining the URL conf.
 from webapi.views import BackupFileView
 from webapi.views import PlayerView
+from webapi.views import SoundView
 from webapi.views import WebRadioView
 from webapi.views import AlarmClockView
 from webapi.views import SystemDateView
@@ -43,5 +44,7 @@ urlpatterns = [
     url(r'^player/?$', PlayerView.PlayerStatus.as_view()),
 
     url(r'^backup/?$', BackupFileView.BackupFileView.as_view()),
+
+    url(r'^volume/?$', SoundView.VolumeManagement.as_view()),
 
 ]
