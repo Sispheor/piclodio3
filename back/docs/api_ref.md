@@ -332,3 +332,41 @@ curl -X POST -F "backup_file=@/home/nico/Desktop/backup.mp3" http://127.0.0.1:80
     "backup_file":"backup_mp3/backup.mp3"
 }
 ```
+
+## Volume management
+
+**Model detail**
+
+| Parameter   | Type | Choices | Description          |
+|-------------|------|---------|----------------------|
+| volume      | int  |         | Volume on the device |
+
+### **Get** /volume
+Get the current volume on the remote device.
+
+#### Example call
+```
+curl -X GET http://127.0.0.1:8000/volume/
+```
+
+#### Example answer
+```
+{
+    "volume": 23    
+}
+```
+
+### **post** /volume
+Set the volume on the remote device.
+
+#### Example call
+```
+curl -X POST http://127.0.0.1:8000/volume/
+```
+
+#### Example answer
+```
+{
+    "volume": 50    
+}
+```
