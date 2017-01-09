@@ -7,8 +7,10 @@ E.g: python run_web_radio.py 12 20
 """
 import os
 import sys
+
 import django
-from webapi.PlayerManager import CallbackPlayer, ThreadTimeout
+
+from webapi.Utils.PlayerManager import CallbackPlayer, ThreadTimeout
 
 # load django models
 project_path = os.path.dirname(os.path.realpath(__file__))

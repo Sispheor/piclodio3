@@ -1,7 +1,7 @@
 import inspect
 import os
 
-from webapi.CrontabManager import CrontabManager
+from webapi.Utils.CrontabManager import CrontabManager
 
 
 def add_job_in_crontab(alarm):

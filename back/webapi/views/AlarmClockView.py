@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from webapi.CrontabManager import CrontabManager
+from webapi.Utils.CrontabManager import CrontabManager
 from webapi.models import AlarmClock
 from webapi.serializers.AlarmClockSerializer import AlarmClockSerializer
 from webapi.views import Utils
