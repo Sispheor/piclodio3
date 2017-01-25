@@ -1,3 +1,4 @@
+import { WebRadio } from './../web-radios/web-radio';
 import { SystemDateService } from './systemdate.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {SystemDate} from '../system-date';
@@ -24,8 +25,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.systemDateSubscribption = this.systemDateService.getSystemDate().subscribe(this.setClockCallback.bind(this));
-    this.active_webradios = this.webRadioService.getAllWebRadios().filter(webradio => webradio.is_active)
-
+    
+    //this.active_webradios = this.webRadioService.getAllWebRadios().filter(webradio => webradio.is_active)
+    this.webRadioService.getAllWebRadios()                                                       
+                            .subscribe(this.filterDefaultWebRadio.bind(this));
     
   }
   // subcribe return the target object
@@ -47,6 +50,17 @@ export class HomepageComponent implements OnInit, OnDestroy {
         this.clockIncrementSubscription.unsubscribe();
     }
     
+  }
+
+  /**
+   * Filter the received list of webradios to keep only the active one (is_default)
+   */
+  filterDefaultWebRadio(webradios: WebRadio[]){
+      this.all_webradios = webradios;
+      console.log(webradios);
+      this.active_webradios = this.all_webradios.filter(
+        webradio => webradio.is_default === true
+      )
   }
 
 }

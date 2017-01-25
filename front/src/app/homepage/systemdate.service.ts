@@ -13,7 +13,7 @@ export class SystemDateService {
     // GET /alarmclocks
     getSystemDate(): Observable<Date> {
         
-        var datejsonObservable = this.httpService.get("http://10.33.101.127:8000/systemdate/");
+        var datejsonObservable = this.httpService.get("http://192.168.0.12:8000/systemdate/");
 
         return this.dateJson(datejsonObservable)
         

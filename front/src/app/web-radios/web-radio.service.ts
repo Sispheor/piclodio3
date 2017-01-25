@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { WebRadio } from './web-radio';
 import { WEBRADIOS } from '../mock-webradios';
@@ -11,17 +13,26 @@ export class WebRadioService {
   // Placeholder for webradio's. We get the mock for testing
   webradios: WebRadio[] = WEBRADIOS;
 
-  constructor() { }
+  baseUrl: string = "http://192.168.0.12:8000"
+
+  constructor(private httpService: Http) { }
 
   // GET /webradios
-  getAllWebRadios(): WebRadio[] {
-    return this.webradios;
+  getAllWebRadios(): Observable<WebRadio[]> {
+    //return this.webradios;
+    var webRadios = this.httpService.get(this.baseUrl+"/webradio/")
+                          // and calling .json() on the response to return data
+                         .map((res:Response) => res.json())
+  //  console.log(webRadios);
+
+    return webRadios;
   }
 
   // GET /webradios/:id
-  getWebRadioById(id: number): WebRadio {
-    let returnedWebRadio = this.webradios
-      .find(x => Number(x.id) === Number(id));
+  getWebRadioById(id: number):  Observable<WebRadio> {
+    var returnedWebRadio = this.httpService.get(this.baseUrl+"/webradio/"+id)
+                          // and calling .json() on the response to return data
+                         .map((res:Response) => res.json())
     return returnedWebRadio;
   }
 
@@ -35,14 +46,14 @@ export class WebRadioService {
   }
 
   // DELETE /webradios/:id
-  deleteWebRadioById(id: number): WebRadioService {
-    this.webradios = this.webradios
-      .filter(webradio => webradio.id !== id);
-    return this;
+  deleteWebRadioById(id: number): Observable<any> { 
+    console.log("call delete service");
+    return this.httpService.delete(this.baseUrl+"/webradio/"+id)                          
+                         .map((res:Response) => res.json());
   }
 
   //  PUT /todos/:id
-  updateWebRadioById(id: number, values: Object = {}): WebRadio {
+  updateWebRadioById(id: number, values: Object = {}): Observable<WebRadio>  {
     let webradio = this.getWebRadioById(id);
     if (!webradio) {
       return null;

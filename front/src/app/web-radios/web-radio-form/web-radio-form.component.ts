@@ -32,7 +32,9 @@ export class WebRadioFormComponent implements OnInit {
         }else{
           console.log("get an id");
           // we have an ID, load the object from it
-          this.newWebradio = this.webRadioService.getWebRadioById(webradioId);
+          this.webRadioService.getWebRadioById(webradioId).subscribe(newWebradio => this.newWebradio = newWebradio,
+                                                                      error => console.error('Error: ' + error),
+                                                                      () => console.log('Completed!'));
           console.log(this.newWebradio);
         }
       });

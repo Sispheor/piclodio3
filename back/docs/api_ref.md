@@ -196,7 +196,6 @@ Delete an alarm
 curl -H "Content-Type: application/json" -X DELETE http://127.0.0.1:8000/alarms/3/
 ```
 
-
 ### **POST** /alarms/
 Create a new alarm.
 
@@ -291,8 +290,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"status": "on", "webradio"
     "status":"on"
 }
 ```
-
-
 
 ## Backup MP3 management
 

@@ -17,13 +17,13 @@ export class WebRadiosComponent implements OnInit {
   constructor(private webRadioService: WebRadioService) { }
 
   ngOnInit() {
-    this.webradios = this.webRadioService.getAllWebRadios();
+    this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
   }
 
   deleteWebRadio(webradio){
     console.log(webradio);
     this.webRadioService.deleteWebRadioById(webradio.id);
-    this.webradios = this.webRadioService.getAllWebRadios();
+    // this.webradios = this.webRadioService.getAllWebRadios();
   }
 
   confirmDeleteWebRadio(webradio){
@@ -37,8 +37,12 @@ export class WebRadiosComponent implements OnInit {
     this.modalConfirmDeleteWebRadioIsVisible = false;
     if (agreed){
       this.deleteWebRadio(this.webRadioToDelete);
-    }
+    } 
+  }
 
+  filterDefaultWebRadio(webradios: WebRadio[]){
+      console.log(webradios);
+      this.webradios = webradios;
   }
 
 

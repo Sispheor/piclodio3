@@ -27,7 +27,12 @@ export class AlarmClockFormComponent implements OnInit {
               private alarmClockService: AlarmClockService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
-    this.webradios = this.webRadioService.getAllWebRadios();
+    this.webRadioService.getAllWebRadios().subscribe(
+                                webradios => this.webradios = webradios, //Bind to view
+                                err => {
+                                    // Log errors if any
+                                    console.log(err);
+                                });
     this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
     this.minute_list= this.create_range(59);
     this.hour_list= this.create_range(23);
