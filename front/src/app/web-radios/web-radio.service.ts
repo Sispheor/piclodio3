@@ -1,3 +1,4 @@
+import { GlobalVariable } from './../globals';
 import { Observable } from 'rxjs/Observable';
 import { Headers, Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -7,7 +8,7 @@ import { WEBRADIOS } from '../mock-webradios';
 @Injectable()
 export class WebRadioService {
  
-  baseUrl: string = "http://192.168.0.12:8000"
+  baseUrl: string = GlobalVariable.BASE_API_URL;
 
   constructor(private httpService: Http) {}
 

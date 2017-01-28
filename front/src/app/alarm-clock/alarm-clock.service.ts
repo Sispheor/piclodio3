@@ -1,3 +1,6 @@
+import { GlobalVariable } from './../globals';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import {AlarmClock} from "./alarm-clock";
 import { Injectable } from '@angular/core';
 import { ALARMCLOCK } from '../mock-alarmclock';
@@ -12,12 +15,15 @@ export class AlarmClockService {
   // Placeholder for webradio's. We get the mock for testing
   alarmclocks: AlarmClock[] = ALARMCLOCK;
 
+  baseUrl: string = GlobalVariable.BASE_API_URL;
 
-  constructor() { }
+  constructor(private httpService: Http) { }
 
   // GET /alarmclocks
-  getAllAlarmClocks(): AlarmClock[] {
-    return this.alarmclocks;
+  getAllAlarmClocks(): Observable <AlarmClock[]> {
+    var alarmClocks = this.httpService.get(this.baseUrl + "/alarms/")      
+      .map((res: Response) => res.json())    
+    return alarmClocks;
   }
 
   // DELETE /alarms/:id
@@ -37,22 +43,22 @@ export class AlarmClockService {
   }
 
   // GET /alarms/:id
-  getAlarmClockById(id: number): AlarmClock {
-    let returnedAlarmClock = this.alarmclocks
-      .find(x => Number(x.id) === Number(id));
+  getAlarmClockById(id: number): Observable <AlarmClock> {
+    var returnedAlarmClock = this.httpService.get(this.baseUrl + "/alarms/" + id)      
+      .map((res: Response) => res.json())
     return returnedAlarmClock;
   }
 
-  updateAlarmClockById(id: number, values: Object = {}): AlarmClock {
-    console.log(values);
-    let alarmclock = this.getAlarmClockById(id);
-    if (!alarmclock) {
-      console.log("No alarm to update found with id " + id)
-      return null;
-    }
-    Object.assign(alarmclock, values);
-      console.log(alarmclock.webradio);
-    return alarmclock;
+  updateAlarmClockById(id: number, values: Object = {}): Observable <AlarmClock> {        
+    let body = JSON.stringify(values); // Stringify payload
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    var returnedAlarmClock = this.httpService.put(this.baseUrl + "/alarms/" + id, body, {
+        headers: headers
+      })
+      .map((res: Response) => res.json())
+    return returnedAlarmClock;
   }
 
 

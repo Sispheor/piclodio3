@@ -1,4 +1,3 @@
-
 import {AlarmClockService} from "../alarm-clock.service";
 import {WebRadioService} from "../../web-radios/web-radio.service";
 import {WebRadio} from "../../web-radios/web-radio";
@@ -15,8 +14,9 @@ import {Subscription } from 'rxjs';
 export class AlarmClockFormComponent implements OnInit {
 
   newAlarmClock: AlarmClock = new AlarmClock();
-  webradios : WebRadio[];
+  webradios: WebRadio[];
   alarmclocks: AlarmClock[];
+  existingAlarmClock: boolean = true;
 
   // list of availlable minutes & hours
   minute_list: number[];
@@ -24,18 +24,11 @@ export class AlarmClockFormComponent implements OnInit {
   private subscription: Subscription;
 
   constructor(private webRadioService: WebRadioService,
-              private alarmClockService: AlarmClockService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
-    this.webRadioService.getAllWebRadios().subscribe(
-                                webradios => this.webradios = webradios, //Bind to view
-                                err => {
-                                    // Log errors if any
-                                    console.log(err);
-                                });
-    this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
-    this.minute_list= this.create_range(59);
-    this.hour_list= this.create_range(23);
+    private alarmClockService: AlarmClockService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+    this.minute_list = this.create_range(59);
+    this.hour_list = this.create_range(23);
   }
 
   ngOnInit() {
@@ -44,25 +37,30 @@ export class AlarmClockFormComponent implements OnInit {
       (param: any) => {
         let alarmClockId = param['id'];
         console.log(alarmClockId);
-        if (!alarmClockId){
-          console.log("alarmClockId: no id");
+        if (!alarmClockId) {
+          console.log("no id");
+          this.existingAlarmClock = false;
           return
-        }else{
-          console.log("alarmClockId: get an id: " + alarmClockId);
+        } else {
+          console.log("get an id");
           // we have an ID, load the object from it
-          this.newAlarmClock = this.alarmClockService.getAlarmClockById(alarmClockId);
-          console.log(this.newAlarmClock);
+          this.alarmClockService.getAlarmClockById(alarmClockId).subscribe(
+            newAlarmClock => this.newAlarmClock = newAlarmClock,
+            error => console.error('Error: ' + error),
+            () => console.log('Completed! Get an alarm ' + this.newAlarmClock.webradio));
         }
       });
+      // get the list of WebRadio
+      this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this))
   }
 
   onSubmit() {
     // check if the id alrady exist
     let existingAlarmClock = this.alarmClockService.getAlarmClockById(this.newAlarmClock.id)
-    if (existingAlarmClock){
+    if (existingAlarmClock) {
       console.log("Alarm clock already exist, updating it with val" + existingAlarmClock);
       this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock);
-    }else{
+    } else {
       this.alarmClockService.addAlarmClock((this.newAlarmClock));
       this.newAlarmClock = new AlarmClock();
     }
@@ -70,11 +68,16 @@ export class AlarmClockFormComponent implements OnInit {
     this.router.navigate(["alarms"])
   }
 
-  create_range(maxVal: number): number[]{
-    var x=[];
-    var i=0;
-    while(x.push(i++)<=maxVal){};
+  create_range(maxVal: number): number[] {
+    var x = [];
+    var i = 0;
+    while (x.push(i++) <= maxVal) {};
     return x;
+  }
+
+  setWebRadios(webradios : WebRadio[]){
+    console.log(webradios);
+    this.webradios = webradios;
   }
 
 }

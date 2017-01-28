@@ -21,14 +21,13 @@ export class AlarmClockComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
-    // console.log(this.alarmclocks);
+    this.refreshAlarmClockList();        
   }
 
   deleteAlarmClock(alarmclock){
     // console.log(alarmclock)
     this.alarmClockService.deleteAlarmClockById(alarmclock.id)
-    this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
+    // this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
   }
 
   confirmDeleteAlarmClock(alarmclock: AlarmClock){
@@ -43,6 +42,14 @@ export class AlarmClockComponent implements OnInit {
     if (agreed){
       this.deleteAlarmClock(this.alarmClockToDelete);
     }
+  }
+
+  setAlarmClocks(alarmclocks: AlarmClock[]){
+    this.alarmclocks = alarmclocks;
+  }
+
+  refreshAlarmClockList(){
+      this.alarmClockService.getAllAlarmClocks().subscribe(this.setAlarmClocks.bind(this));
   }
 
 

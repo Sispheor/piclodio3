@@ -1,3 +1,4 @@
+import { INT_TYPE } from '@angular/compiler/src/output/output_ast';
 import { WebRadio } from '../web-radios/web-radio';
 
 export class AlarmClock {
@@ -12,6 +13,7 @@ export class AlarmClock {
     sunday: boolean  = false;
     hour: number;
     minute: number;
+    auto_stop_minutes: number;
     is_active: boolean = false;
     webradio: WebRadio;
 
