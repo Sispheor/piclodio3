@@ -42,6 +42,7 @@ class WebRadioDetail(APIView):
 
     def put(self, request, pk, format=None):
         webradio = self.get_object(pk)
+        print webradio
         serializer = WebRadioSerializer(webradio, data=request.data)
         if serializer.is_valid():
             serializer.save()

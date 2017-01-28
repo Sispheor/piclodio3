@@ -1,3 +1,4 @@
+import { NoSwitchCaseFallThroughWalker } from 'tslint/lib/rules/noSwitchCaseFallThroughRule';
 import { Component, OnInit } from '@angular/core';
 import { WebRadioService } from '../web-radio.service';
 import { WebRadio } from '../web-radio';
@@ -12,6 +13,7 @@ import {Subscription } from 'rxjs';
 export class WebRadioFormComponent implements OnInit {
 
   newWebradio: WebRadio = new WebRadio();
+  existingWebRadio: Boolean = true;
   private subscription: Subscription;
 
   constructor(
@@ -28,6 +30,7 @@ export class WebRadioFormComponent implements OnInit {
         console.log(webradioId);
         if (!webradioId) {
           console.log("no id");
+          this.existingWebRadio = false;
           return
         } else {
           console.log("get an id");
@@ -42,16 +45,28 @@ export class WebRadioFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // check if the id alrady exist
-    let existingWebRadio = this.webRadioService.getWebRadioById(this.newWebradio.id)
-    if (existingWebRadio) {
-      this.webRadioService.updateWebRadioById(this.newWebradio.id, this.newWebradio)
+    console.log("web-radio form: onSubmit clicked")
+    // check if the id alrady exist    
+    if (this.existingWebRadio) {
+      // let webRadioToUpdate = this.webRadioService.getWebRadioById(this.newWebradio.id).toPromise()      
+      console.log("web-radio form: webradio with id "+ this.newWebradio.id +" already exist. Call update service");
+      this.webRadioService.updateWebRadioById(this.newWebradio.id, this.newWebradio).subscribe(
+        success => {          
+          this.router.navigate(["webradios"]);
+        },
+        error => console.log("Error "+ error)
+      );
     } else {
-      this.webRadioService.addWebRadio(this.newWebradio)
-      this.newWebradio = new WebRadio();
+      console.log("Create new web radio");
+      this.webRadioService.addWebRadio(this.newWebradio).subscribe(
+        success => {          
+          this.router.navigate(["webradios"]);
+        },
+        error => console.log("Error "+ error)
+      );
+      
     }
-    // return to web radio list
-    this.router.navigate(["webradios"])
+    
   }
 
 }

@@ -10,6 +10,9 @@ class WebRadio(models.Model):
     # The last started web radio become the default one
     is_default = models.BooleanField(default=False)
 
+    def __str__(self):
+        return "[WebRadio] name: %s, url: %s, is_default: %s" % (self.name, self.url, self.is_default)
+
 
 class AlarmClock(models.Model):
     name = models.CharField(max_length=250)
