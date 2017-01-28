@@ -15,42 +15,42 @@ export class WebRadiosComponent implements OnInit {
   modalConfirmDeleteWebRadioIsVisible: Boolean = false;
   message: String;
 
-  constructor(private webRadioService: WebRadioService) { }
+  constructor(private webRadioService: WebRadioService) {}
 
   ngOnInit() {
     this.refreshWebRadioList();
   }
 
-  deleteWebRadio(webRadioToDelete){
+  deleteWebRadio(webRadioToDelete) {
     console.log("Deleting" + webRadioToDelete);
     this.webRadioService.deleteWebRadioById(webRadioToDelete.id).subscribe(success => this.refreshWebRadioList(),
-                                                                            error => console.log("error: " + error))
-    
+      error => console.log("error: " + error))
+
   }
 
-  confirmDeleteWebRadio(webradio){
-      console.log("confirmDeleteWebRadio clicked");
-      this.modalConfirmDeleteWebRadioIsVisible = true;
-      this.webRadioToDelete = webradio;
-      this.message = "Are you sure you want to delete " + this.webRadioToDelete.name
+  confirmDeleteWebRadio(webradio) {
+    console.log("confirmDeleteWebRadio clicked");
+    this.modalConfirmDeleteWebRadioIsVisible = true;
+    this.webRadioToDelete = webradio;
+    this.message = "Are you sure you want to delete " + this.webRadioToDelete.name
   }
 
   onConfirm(agreed: boolean) {
     this.modalConfirmDeleteWebRadioIsVisible = false;
-    if (agreed){
+    if (agreed) {
       this.deleteWebRadio(this.webRadioToDelete);
-    } 
-  }
-
-  setWebRadios(webradios: WebRadio[]){
-      console.log(webradios);
-      this.webradios = webradios;
-  }
-
-  refreshWebRadioList(){
-      console.log("Refresh the web radio list");
-        this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
     }
+  }
+
+  setWebRadios(webradios: WebRadio[]) {
+    console.log(webradios);
+    this.webradios = webradios;
+  }
+
+  refreshWebRadioList() {
+    console.log("Refresh the web radio list");
+    this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
+  }
 
 
 }

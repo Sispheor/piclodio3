@@ -18,7 +18,7 @@ export class WebRadioFormComponent implements OnInit {
     private webRadioService: WebRadioService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     // get the id in the URL
@@ -26,15 +26,15 @@ export class WebRadioFormComponent implements OnInit {
       (param: any) => {
         let webradioId = param['id'];
         console.log(webradioId);
-        if (!webradioId){
+        if (!webradioId) {
           console.log("no id");
           return
-        }else{
+        } else {
           console.log("get an id");
           // we have an ID, load the object from it
           this.webRadioService.getWebRadioById(webradioId).subscribe(newWebradio => this.newWebradio = newWebradio,
-                                                                      error => console.error('Error: ' + error),
-                                                                      () => console.log('Completed!'));
+            error => console.error('Error: ' + error),
+            () => console.log('Completed!'));
           console.log(this.newWebradio);
         }
       });
@@ -44,9 +44,9 @@ export class WebRadioFormComponent implements OnInit {
   onSubmit() {
     // check if the id alrady exist
     let existingWebRadio = this.webRadioService.getWebRadioById(this.newWebradio.id)
-    if (existingWebRadio){
+    if (existingWebRadio) {
       this.webRadioService.updateWebRadioById(this.newWebradio.id, this.newWebradio)
-    }else{
+    } else {
       this.webRadioService.addWebRadio(this.newWebradio)
       this.newWebradio = new WebRadio();
     }

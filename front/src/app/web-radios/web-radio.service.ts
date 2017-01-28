@@ -15,24 +15,24 @@ export class WebRadioService {
 
   baseUrl: string = "http://192.168.0.12:8000"
 
-  constructor(private httpService: Http) { }
+  constructor(private httpService: Http) {}
 
   // GET /webradios
-  getAllWebRadios(): Observable<WebRadio[]> {
+  getAllWebRadios(): Observable < WebRadio[] > {
     //return this.webradios;
-    var webRadios = this.httpService.get(this.baseUrl+"/webradio/")
-                          // and calling .json() on the response to return data
-                         .map((res:Response) => res.json())
-  //  console.log(webRadios);
+    var webRadios = this.httpService.get(this.baseUrl + "/webradio/")
+      // and calling .json() on the response to return data
+      .map((res: Response) => res.json())
+    //  console.log(webRadios);
 
     return webRadios;
   }
 
   // GET /webradios/:id
-  getWebRadioById(id: number):  Observable<WebRadio> {
-    var returnedWebRadio = this.httpService.get(this.baseUrl+"/webradio/"+id)
-                          // and calling .json() on the response to return data
-                         .map((res:Response) => res.json())
+  getWebRadioById(id: number): Observable < WebRadio > {
+    var returnedWebRadio = this.httpService.get(this.baseUrl + "/webradio/" + id)
+      // and calling .json() on the response to return data
+      .map((res: Response) => res.json())
     return returnedWebRadio;
   }
 
@@ -46,16 +46,14 @@ export class WebRadioService {
   }
 
   // DELETE /webradios/:id
-  deleteWebRadioById(id: number): Observable<any> { 
-    // TODO : fix this shit. The method is called but not the backend. FU angular.
+  deleteWebRadioById(id: number): Observable < any > {    
     console.log("call delete service, delete webradio id " + id);
-    
-    return this.httpService.delete(this.baseUrl+"/webradio/"+id)                          
-                         .map((res:Response) => res.json());
+    return this.httpService.delete(this.baseUrl + "/webradio/" + id)
+      .map((res: Response) => res.json());
   }
 
   //  PUT /todos/:id
-  updateWebRadioById(id: number, values: Object = {}): Observable<WebRadio>  {
+  updateWebRadioById(id: number, values: Object = {}): Observable < WebRadio > {
     let webradio = this.getWebRadioById(id);
     if (!webradio) {
       return null;
