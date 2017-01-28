@@ -47,7 +47,9 @@ export class WebRadioService {
 
   // DELETE /webradios/:id
   deleteWebRadioById(id: number): Observable<any> { 
-    console.log("call delete service");
+    // TODO : fix this shit. The method is called but not the backend. FU angular.
+    console.log("call delete service, delete webradio id " + id);
+    
     return this.httpService.delete(this.baseUrl+"/webradio/"+id)                          
                          .map((res:Response) => res.json());
   }

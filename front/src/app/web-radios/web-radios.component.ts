@@ -1,3 +1,4 @@
+import { error } from 'util';
 import { Component, OnInit } from '@angular/core';
 import { WebRadioService } from './web-radio.service';
 import { WebRadio } from './web-radio';
@@ -17,13 +18,14 @@ export class WebRadiosComponent implements OnInit {
   constructor(private webRadioService: WebRadioService) { }
 
   ngOnInit() {
-    this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
+    this.refreshWebRadioList();
   }
 
-  deleteWebRadio(webradio){
-    console.log(webradio);
-    this.webRadioService.deleteWebRadioById(webradio.id);
-    // this.webradios = this.webRadioService.getAllWebRadios();
+  deleteWebRadio(webRadioToDelete){
+    console.log("Deleting" + webRadioToDelete);
+    this.webRadioService.deleteWebRadioById(webRadioToDelete.id).subscribe(success => this.refreshWebRadioList(),
+                                                                            error => console.log("error: " + error))
+    
   }
 
   confirmDeleteWebRadio(webradio){
@@ -40,10 +42,15 @@ export class WebRadiosComponent implements OnInit {
     } 
   }
 
-  filterDefaultWebRadio(webradios: WebRadio[]){
+  setWebRadios(webradios: WebRadio[]){
       console.log(webradios);
       this.webradios = webradios;
   }
+
+  refreshWebRadioList(){
+      console.log("Refresh the web radio list");
+        this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
+    }
 
 
 }
