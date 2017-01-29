@@ -50,22 +50,31 @@ export class AlarmClockFormComponent implements OnInit {
             () => console.log('Completed! Get an alarm ' + this.newAlarmClock.webradio));
         }
       });
-      // get the list of WebRadio
-      this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this))
+
+    // get the list of WebRadio
+    this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this))
   }
 
   onSubmit() {
-    // check if the id alrady exist
-    let existingAlarmClock = this.alarmClockService.getAlarmClockById(this.newAlarmClock.id)
-    if (existingAlarmClock) {
-      console.log("Alarm clock already exist, updating it with val" + existingAlarmClock);
-      this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock);
+    console.log("alarms form: onSubmit clicked")
+    if (this.existingAlarmClock) {
+      console.log("Alarm clock already exist, updating it with val" + this.newAlarmClock);
+      this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock).subscribe(
+        success => {          
+          this.router.navigate(["alarms"]);
+        },
+        error => console.log("Error "+ error)
+      );
     } else {
-      this.alarmClockService.addAlarmClock((this.newAlarmClock));
-      this.newAlarmClock = new AlarmClock();
+      this.alarmClockService.addAlarmClock(this.newAlarmClock).subscribe(
+        success => {
+          this.router.navigate(["alarms"]);
+        },
+        error => console.log("Error " + error)
+      );;
+
     }
-    // return to web radio list
-    this.router.navigate(["alarms"])
+
   }
 
   create_range(maxVal: number): number[] {
@@ -75,7 +84,7 @@ export class AlarmClockFormComponent implements OnInit {
     return x;
   }
 
-  setWebRadios(webradios : WebRadio[]){
+  setWebRadios(webradios: WebRadio[]) {
     console.log(webradios);
     this.webradios = webradios;
   }

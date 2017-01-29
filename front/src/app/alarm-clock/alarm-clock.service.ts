@@ -3,18 +3,10 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {AlarmClock} from "./alarm-clock";
 import { Injectable } from '@angular/core';
-import { ALARMCLOCK } from '../mock-alarmclock';
-
 
 @Injectable()
 export class AlarmClockService {
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of id's
-  lastId: number = 2;
-
-  // Placeholder for webradio's. We get the mock for testing
-  alarmclocks: AlarmClock[] = ALARMCLOCK;
-
+  
   baseUrl: string = GlobalVariable.BASE_API_URL;
 
   constructor(private httpService: Http) { }
@@ -27,19 +19,23 @@ export class AlarmClockService {
   }
 
   // DELETE /alarms/:id
-  deleteAlarmClockById(id: number): AlarmClockService {
-    this.alarmclocks = this.alarmclocks
-      .filter(alarmclock => alarmclock.id !== id);
-    return this;
+  deleteAlarmClockById(id: number): Observable < any > {
+    console.log("call delete service, delete alarm id " + id);
+    return this.httpService.delete(this.baseUrl + "/alarms/" + id)
+      .map((res: Response) => res.json());
   }
 
   // POST /alarms/new
-  addAlarmClock(alarmClock: AlarmClock): AlarmClockService {
-    if (!alarmClock.id) {
-      alarmClock.id = ++this.lastId;
-    }
-    this.alarmclocks.push(alarmClock);
-    return this;
+  addAlarmClock(alarmClock: AlarmClock): Observable <AlarmClock> {
+    let body = JSON.stringify(alarmClock); // Stringify payload
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    var returnedAlarmClock = this.httpService.post(this.baseUrl + "/alarms/", body, {
+        headers: headers
+      })
+      .map((res: Response) => res.json())
+    return returnedAlarmClock;
   }
 
   // GET /alarms/:id

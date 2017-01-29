@@ -26,8 +26,9 @@ export class AlarmClockComponent implements OnInit {
 
   deleteAlarmClock(alarmclock){
     // console.log(alarmclock)
-    this.alarmClockService.deleteAlarmClockById(alarmclock.id)
-    // this.alarmclocks = this.alarmClockService.getAllAlarmClocks();
+    this.alarmClockService.deleteAlarmClockById(alarmclock.id).subscribe(success => this.refreshAlarmClockList(),
+      error => console.log("error: " + error));
+
   }
 
   confirmDeleteAlarmClock(alarmclock: AlarmClock){
@@ -51,8 +52,5 @@ export class AlarmClockComponent implements OnInit {
   refreshAlarmClockList(){
       this.alarmClockService.getAllAlarmClocks().subscribe(this.setAlarmClocks.bind(this));
   }
-
-
-
 
 }

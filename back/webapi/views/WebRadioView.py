@@ -4,7 +4,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from webapi.models import WebRadio
+from webapi.Utils.CrontabManager import CrontabManager
+from webapi.models import WebRadio, AlarmClock
 from webapi.serializers.WebRadioSerializer import WebRadioSerializer
 
 
@@ -42,7 +43,6 @@ class WebRadioDetail(APIView):
 
     def put(self, request, pk, format=None):
         webradio = self.get_object(pk)
-        print webradio
         serializer = WebRadioSerializer(webradio, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -51,6 +51,12 @@ class WebRadioDetail(APIView):
 
     def delete(self, request, pk, format=None):
         webradio = self.get_object(pk)
-        print webradio
+        # when we delete a web radio, all alarm based on this on will be deleted to, remove them from the contab before
+        all_alarms_which_use_the_web_radio_to_delete = AlarmClock.objects.filter(webradio=webradio)
+        for alarm in all_alarms_which_use_the_web_radio_to_delete:
+            # remove the job from the crontab
+            job_comment = "piclodio%s" % alarm.id
+            CrontabManager.remove_job(job_comment)
+        # then we can safely delete the web radio
         webradio.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

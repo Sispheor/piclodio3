@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Headers, Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { WebRadio } from './web-radio';
-import { WEBRADIOS } from '../mock-webradios';
 
 @Injectable()
 export class WebRadioService {
