@@ -1,3 +1,5 @@
+import { OptionComponent } from './option/option.component';
+import { OptionService } from './option/option.service';
 import { PlayerService } from './player/player.service';
 import "rxjs/add/operator/map";
 import { SystemDateService } from './homepage/systemdate.service';
@@ -7,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
+import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
 
 import { AppComponent } from './app.component';
 import { WebRadiosComponent } from './web-radios/web-radios.component';
@@ -26,9 +29,11 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
     AlarmClockComponent,
     WebRadioFormComponent,
     AlarmClockFormComponent,
-    ConfirmDeleteModalComponent
+    ConfirmDeleteModalComponent,
+    OptionComponent
   ],
   imports: [
+    ProgressbarModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -50,7 +55,8 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
         component: WebRadioFormComponent
       },
       { path: 'webradios/:id',
-       component: WebRadioFormComponent},
+       component: WebRadioFormComponent
+      },
       {
         path: 'alarms',
         component: AlarmClockComponent
@@ -63,9 +69,13 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
         path: 'alarms/:id',
         component: AlarmClockFormComponent
       },
+      {
+        path: 'option',
+        component: OptionComponent
+      }
     ])
   ],
-  providers: [WebRadioService, AlarmClockService, SystemDateService, PlayerService],
+  providers: [WebRadioService, AlarmClockService, SystemDateService, PlayerService, OptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
