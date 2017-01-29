@@ -1,3 +1,7 @@
+import { Router } from '@angular/router';
+import { platform } from 'os';
+import { Player } from '../player/player';
+import { PlayerService } from './../player/player.service';
 import { error } from 'util';
 import { Component, OnInit } from '@angular/core';
 import { WebRadioService } from './web-radio.service';
@@ -15,20 +19,20 @@ export class WebRadiosComponent implements OnInit {
   modalConfirmDeleteWebRadioIsVisible: Boolean = false;
   message: String;
 
-  constructor(private webRadioService: WebRadioService) {}
+  constructor(private webRadioService: WebRadioService, private playerService: PlayerService, private router: Router) {}
 
   ngOnInit() {
     this.refreshWebRadioList();
   }
 
-  deleteWebRadio(webRadioToDelete) {
+  deleteWebRadio(webRadioToDelete: WebRadio) {
     console.log("Deleting" + webRadioToDelete);
     this.webRadioService.deleteWebRadioById(webRadioToDelete.id).subscribe(success => this.refreshWebRadioList(),
       error => console.log("error: " + error))
 
   }
 
-  confirmDeleteWebRadio(webradio) {
+  confirmDeleteWebRadio(webradio: WebRadio) {
     console.log("confirmDeleteWebRadio clicked");
     this.modalConfirmDeleteWebRadioIsVisible = true;
     this.webRadioToDelete = webradio;
@@ -50,6 +54,20 @@ export class WebRadiosComponent implements OnInit {
   refreshWebRadioList() {
     console.log("Refresh the web radio list");
     this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
+  }
+
+  playWebRadio(webradio: WebRadio) {
+    console.log("Play web radio id " + webradio.id);
+    let player = new Player();
+    player.status = "on";
+    player.webradio = webradio.id;
+    this.playerService.updatePlayer(player).subscribe(
+        success => {          
+          this.router.navigate(["homepage"]);
+        },
+        error => console.log("Error "+ error)
+      );
+
   }
 
 

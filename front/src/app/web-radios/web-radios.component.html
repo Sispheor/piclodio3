@@ -11,6 +11,9 @@
     <a [routerLink]="['/webradios', webradio.id]">
       <i class="material-icons">mode_edit</i>
     </a>
+    <a (click)="playWebRadio(webradio)" type="button" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-play"></span>
+    </a>
     <button class="destroy" (click)="confirmDeleteWebRadio(webradio)">X</button>
   </li>
 </ul>
