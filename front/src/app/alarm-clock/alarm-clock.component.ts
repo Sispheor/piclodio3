@@ -53,4 +53,22 @@ export class AlarmClockComponent implements OnInit {
       this.alarmClockService.getAllAlarmClocks().subscribe(this.setAlarmClocks.bind(this));
   }
 
+  /** 
+   * Switch the status of the target AlarmClock. If the alarm is active, then switch to inactive and vice versa
+   * */  
+  switchActiveAlarmClock(alarmclock: AlarmClock){
+    if (alarmclock.is_active){
+      alarmclock.is_active = false
+    }else{
+       alarmclock.is_active = true
+    }
+    // update the AlarmClock
+    this.alarmClockService.updateAlarmClockById(alarmclock.id, alarmclock).subscribe(
+        success => {          
+          this.refreshAlarmClockList();
+        },
+        error => console.log("Error "+ error)
+      );
+  }
+
 }

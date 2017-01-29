@@ -1,3 +1,4 @@
+import { PlayerService } from './player/player.service';
 import "rxjs/add/operator/map";
 import { SystemDateService } from './homepage/systemdate.service';
 import {AlarmClockService} from "./alarm-clock/alarm-clock.service";
@@ -64,7 +65,7 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
       },
     ])
   ],
-  providers: [WebRadioService, AlarmClockService, SystemDateService],
+  providers: [WebRadioService, AlarmClockService, SystemDateService, PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

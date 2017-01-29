@@ -9,3 +9,10 @@
     <span class="badge">{{active_webradio.id}}</span> {{active_webradio.name}} {{active_webradio.is_default}} 
   </li>
 </ul>
+
+<h3>Player</h3>
+
+<div *ngIf="playerLoaded">
+  <button (click)="switchPlayerStatus()" type="button" class="btn btn-{{ player.status == 'on' ? 'primary' : 'default' }} btn-lg btn-block">Start</button>
+  <button (click)="switchPlayerStatus()" type="button" class="btn btn-{{ player.status == 'off' ? 'primary' : 'default' }} btn-lg btn-block">Stop</button>
+</div>

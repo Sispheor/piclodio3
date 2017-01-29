@@ -35,7 +35,7 @@
           </a>
         </td>
         <td class="col-md-1">
-          <a type="button" class="btn btn-{{ alarmclock.is_active ? 'primary' : 'default' }} btn-sm">
+          <a (click)="switchActiveAlarmClock(alarmclock)" type="button" class="btn btn-{{ alarmclock.is_active ? 'primary' : 'default' }} btn-sm">
             <span class="glyphicon {{ alarmclock.is_active ? 'glyphicon-check' : 'glyphicon-unchecked' }}"></span>
           </a>
         </td>
