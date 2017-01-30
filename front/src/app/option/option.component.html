@@ -1,21 +1,38 @@
-
-<h1>Volume</h1>
-
-<div *ngIf="volumeLoaded">
-    <div class="progress">
-        <progressbar value="{{currentVolume.volume}}">{{currentVolume.volume}}%</progressbar>
+<div class="container">
+    <h1>Volume</h1>
+    <div *ngIf="volumeLoaded">
+        <div class="progress">
+            <progressbar value="{{currentVolume.volume}}">{{currentVolume.volume}}%</progressbar>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button (click)="reduceVolume()" type="button" class="btn btn-default btn-lg btn-block">
+                    <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button (click)="increaseVolume()" type="button" class="btn btn-default btn-lg btn-block">
+                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
     </div>
+    <h1>Backup MP3</h1>
+    <input name="backup_file" type="file" ng2FileSelect [uploader]="uploader" />
 
-    <div class="row">
-        <div class="col-md-6">
-            <button (click)="reduceVolume()" type="button" class="btn btn-default btn-lg btn-block">
-                <span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span>
-            </button>
-        </div>
-        <div class="col-md-6">
-            <button (click)="increaseVolume()" type="button" class="btn btn-default btn-lg btn-block">
-                <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
-            </button>
-        </div>
+    <div *ngFor="let item of uploader.queue">
+        <strong>{{ item?.file?.name }}</strong>
+        <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+            <span class="glyphicon glyphicon-upload"></span> Upload
+        </button>
+        <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+            <span class="glyphicon glyphicon-trash"></span> Remove
+        </button>
+    </div>
+    <div class="progress">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
     </div>
 </div>

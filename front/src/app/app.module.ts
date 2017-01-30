@@ -21,6 +21,7 @@ import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
 import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
 import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
 import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-delete-modal.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-dele
     WebRadioFormComponent,
     AlarmClockFormComponent,
     ConfirmDeleteModalComponent,
-    OptionComponent
+    OptionComponent,
+    FileSelectDirective
   ],
   imports: [
     CollapseModule.forRoot(),

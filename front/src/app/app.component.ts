@@ -9,12 +9,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public isCollapsed: boolean = true;
 
-  public collapsed(event:any):void {
-    console.log("collapsed called");
-  }
-
-  public expanded(event:any):void {
-    console.log("expanded called");
-  }
 }
 
