@@ -1,3 +1,4 @@
+import { Backup } from './backup';
 import { Volume } from './volume';
 import { GlobalVariable } from './../globals';
 import { Http, Response, Headers } from '@angular/http';
@@ -28,6 +29,12 @@ export class OptionService {
       })
       .map((res: Response) => res.json())
     return newVolume;
+  }
+
+  getBackup(): Observable <Backup[]> {
+    var backup = this.httpService.get(this.baseUrl + "/backup/")
+      .map((res: Response) => res.json())
+    return backup;
   }
 
 }

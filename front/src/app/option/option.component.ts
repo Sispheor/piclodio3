@@ -1,3 +1,4 @@
+import { Backup } from './backup';
 import { GlobalVariable } from './../globals';
 import { Volume } from './volume';
 import { OptionService } from './option.service';
@@ -12,6 +13,7 @@ import { FileUploader } from 'ng2-file-upload';
 export class OptionComponent implements OnInit {
   baseUrl: string = GlobalVariable.BASE_API_URL;
   currentVolume: Volume;
+  currentBackup: Backup;
   volumeLoaded: boolean = false;
   public uploader: FileUploader = new FileUploader({
     url: this.baseUrl + "/backup",
@@ -21,7 +23,14 @@ export class OptionComponent implements OnInit {
     removeAfterUpload: true
   });
 
-  constructor(private optionService: OptionService) {}
+  constructor(private optionService: OptionService) {
+
+    this.uploader.onCompleteAll = () => {
+      console.log('upload complete');
+      // refresh the view
+      this.refreshBackup();
+    };
+  }
 
   ngOnInit() {
     // get the current volume
@@ -29,6 +38,11 @@ export class OptionComponent implements OnInit {
     this.uploader.onBeforeUploadItem = (item) => {
       item.withCredentials = false;
     }
+    this.refreshBackup();
+  }
+
+  refreshBackup() {
+    this.optionService.getBackup().subscribe(this.setBackup.bind(this));
   }
 
   refreshVolume() {
@@ -38,6 +52,21 @@ export class OptionComponent implements OnInit {
   setVolume(volume: Volume) {
     this.currentVolume = volume;
     this.volumeLoaded = true;
+  }
+
+  setBackup(backup: Backup[]) {
+    console.log("Recevied backup: ");
+    console.log(backup);
+    if (typeof backup !== 'undefined' && backup.length > 0) {
+      // the array is defined and has at least one element
+      console.log(backup[0]);
+      // we receive a complete path that contain the root path and the file name. let's keep only the file name
+      let tmpBackup = backup[0];
+      let onlyFileName = tmpBackup.backup_file.split('/')[1];
+      tmpBackup.backup_file = onlyFileName;
+      this.currentBackup = tmpBackup;
+    }
+
   }
 
   reduceVolume() {
