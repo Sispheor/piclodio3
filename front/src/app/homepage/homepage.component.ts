@@ -1,3 +1,6 @@
+import { AlarmClock } from '../alarm-clock/alarm-clock';
+import { AlarmClockService } from './../alarm-clock/alarm-clock.service';
+import { DateFormatter } from '@angular/common/src/pipes/intl';
 import { Player } from './../player/player';
 import { PlayerService } from '../player/player.service';
 import { WebRadio } from './../web-radios/web-radio';
@@ -15,7 +18,9 @@ import { Observable, Subscription } from 'rxjs/Rx';
 })
 export class HomepageComponent implements OnInit, OnDestroy {
   clock: Date;
+  clockString: string;
   active_webradios: any[];
+  active_alarms: AlarmClock[];
   all_webradios: any[];
   systemDateSubscribption: Subscription;
   clockIncrementSubscription: Subscription;
@@ -24,7 +29,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   constructor(private webRadioService: WebRadioService,
     private systemDateService: SystemDateService,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private alarmClockService: AlarmClockService) {
 
 
   }
@@ -37,6 +43,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
       .subscribe(this.filterDefaultWebRadio.bind(this));
     // get the player status
     this.playerService.getPlayerStatus().subscribe(this.setPlayerStatus.bind(this));
+    // get the list of activated Alarm
+    this.alarmClockService.getAllAlarmClocks().subscribe(this.setActiveAlarmClocks.bind(this));
 
   }
   // subcribe return the target object
@@ -50,6 +58,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   incrementDate() {
     this.clock.setSeconds(this.clock.getSeconds() + 1)
+    this.clockString = DateFormatter.format(this.clock, 'en', 'EEEE, MMMM d, y H:mm:ss');
   }
 
   ngOnDestroy() {
@@ -72,7 +81,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   setPlayerStatus(player: Player){
-    console.log("Player: " + player);    
+    console.log("Player: " + player);
     this.player = player;
     this.playerLoaded = true;
   }
@@ -84,6 +93,13 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.player.status = "on";
     }
     this.playerService.updatePlayer(this.player).subscribe(this.setPlayerStatus.bind(this));
+  }
+
+  setActiveAlarmClocks(alarmclocks: AlarmClock[]){
+    this.active_alarms = alarmclocks.filter(
+      alarms => alarms.is_active === true
+    )
+
   }
 
 }
