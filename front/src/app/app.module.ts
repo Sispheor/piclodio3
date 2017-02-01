@@ -1,3 +1,4 @@
+import { AlertModule } from 'ng2-bootstrap/alert';
 import { CollapseModule } from 'ng2-bootstrap/collapse';
 import { OptionComponent } from './option/option.component';
 import { OptionService } from './option/option.service';
@@ -22,6 +23,7 @@ import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-for
 import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
 import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-delete-modal.component';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +35,13 @@ import { FileSelectDirective } from 'ng2-file-upload';
     AlarmClockFormComponent,
     ConfirmDeleteModalComponent,
     OptionComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    PopupComponent
   ],
   imports: [
     CollapseModule.forRoot(),
     ProgressbarModule.forRoot(),
+    AlertModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,

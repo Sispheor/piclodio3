@@ -1,8 +1,9 @@
+import { PopupComponent } from './../popup/popup.component';
 import { Backup } from './backup';
 import { GlobalVariable } from './../globals';
 import { Volume } from './volume';
 import { OptionService } from './option.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
@@ -22,38 +23,66 @@ export class OptionComponent implements OnInit {
     queueLimit: 1,
     removeAfterUpload: true
   });
+  @ViewChild(PopupComponent) popupComponent: PopupComponent;
 
   constructor(private optionService: OptionService) {
 
-    this.uploader.onCompleteAll = () => {
+    // action when we successfully upload a file
+    this.uploader.onSuccessItem = () => {
       console.log('upload complete');
       // refresh the view
       this.refreshBackup();
+      // show a popup message
+      this.popupComponent.add('success', 'File uploaded');
     };
+
+    // action when we failled to upload a file
+    this.uploader.onErrorItem = () => {
+      console.log('upload failled');
+      // show a popup message
+      this.popupComponent.add('danger', 'Fail to upload');
+    };
+
   }
 
   ngOnInit() {
     // get the current volume
     this.refreshVolume();
+    // get the current backup file
+    this.refreshBackup();
+    // set CORS to *
     this.uploader.onBeforeUploadItem = (item) => {
       item.withCredentials = false;
     }
-    this.refreshBackup();
+
   }
 
+  /**
+   * Load the view with the received backup file
+   */
   refreshBackup() {
     this.optionService.getBackup().subscribe(this.setBackup.bind(this));
   }
 
+  /**
+   * Load the view with the received volume
+   */
   refreshVolume() {
     this.optionService.getVolume().subscribe(this.setVolume.bind(this));
   }
 
+  /**
+   * Bind the reveiced data to the view
+   */
   setVolume(volume: Volume) {
     this.currentVolume = volume;
     this.volumeLoaded = true;
   }
 
+  /**
+   * Bind the reveiced data to the view
+   * The data contains a full path, the method will only keep the file name
+   */
   setBackup(backup: Backup[]) {
     console.log("Recevied backup: ");
     console.log(backup);
@@ -69,6 +98,9 @@ export class OptionComponent implements OnInit {
 
   }
 
+  /**
+   * Call the backend to reduce the volume
+   */
   reduceVolume() {
     let newVolumeLevel = this.currentVolume.volume;
     newVolumeLevel = newVolumeLevel - 10;
@@ -84,6 +116,9 @@ export class OptionComponent implements OnInit {
     );
   }
 
+  /**
+   * Call the backend to increase the volume
+   */
   increaseVolume() {
     let newVolumeLevel = this.currentVolume.volume;
     newVolumeLevel = newVolumeLevel + 10;
