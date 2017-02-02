@@ -1,23 +1,44 @@
-<h3>My web radio</h3>
+<h3>Web radios</h3>
 
-<a routerLink="/webradios/new">
-  <i class="material-icons">Add web radio</i>
+
+<a routerLink="/webradios/new" class="btn btn-success space-little">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add web radio
 </a>
 
 <!-- list current web radio -->
-<ul class="webradios">
-  <li *ngFor="let webradio of webradios">
-    <span class="badge">{{webradio.id}}</span> {{webradio.name}} {{webradio.url}} {{webradio.is_active}}
-    <a [routerLink]="['/webradios', webradio.id]">
-      <i class="material-icons">mode_edit</i>
-    </a>
-    <a (click)="playWebRadio(webradio)" type="button" class="btn btn-primary btn-sm">
-        <span class="glyphicon glyphicon-play"></span>
-    </a>
-    <button class="destroy" (click)="confirmDeleteWebRadio(webradio)">X</button>
-  </li>
-</ul>
-
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-xs-1 text-center">Name</th>
+        <th class="col-xs-1 text-center">Play</th>
+        <th class="col-xs-1 text-center">Edit</th>
+        <th class="col-xs-1 text-center">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let webradio of webradios">
+        <td class="col-xs-1 text-center">{{webradio.name}}</td>
+        <td class="col-xs-1 text-center">
+          <a (click)="playWebRadio(webradio)" type="button" class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-play"></span>
+          </a>
+        </td>
+        <td class="col-xs-1 text-center">
+          <a class="btn btn-default btn-sm" [routerLink]="['/webradios', webradio.id]">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+        </td>
+        <td class="col-xs-1 text-center">
+          <a (click)="confirmDeleteWebRadio(webradio)" type="button" class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <app-confirm-delete-modal
 [message]="message"
