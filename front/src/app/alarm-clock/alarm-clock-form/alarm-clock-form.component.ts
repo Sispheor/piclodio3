@@ -1,7 +1,7 @@
+import { AlarmClock } from './../alarm-clock';
 import {AlarmClockService} from "../alarm-clock.service";
 import {WebRadioService} from "../../web-radios/web-radio.service";
 import {WebRadio} from "../../web-radios/web-radio";
-import {AlarmClock} from "../alarm-clock";
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ export class AlarmClockFormComponent implements OnInit {
   webradios: WebRadio[];
   alarmclocks: AlarmClock[];
   existingAlarmClock: boolean = true;
+  timePicker: Date;
 
   // list of availlable minutes & hours
   minute_list: number[];
@@ -40,12 +41,13 @@ export class AlarmClockFormComponent implements OnInit {
         if (!alarmClockId) {
           console.log("no id");
           this.existingAlarmClock = false;
+          this.timePicker= new Date()
           return
         } else {
           console.log("get an id");
           // we have an ID, load the object from it
           this.alarmClockService.getAlarmClockById(alarmClockId).subscribe(
-            newAlarmClock => this.newAlarmClock = newAlarmClock,
+            this.setExistingAlarmClock.bind(this),
             error => console.error('Error: ' + error),
             () => console.log('Completed! Get an alarm ' + this.newAlarmClock.webradio));
         }
@@ -58,14 +60,19 @@ export class AlarmClockFormComponent implements OnInit {
   onSubmit() {
     console.log("alarms form: onSubmit clicked")
     if (this.existingAlarmClock) {
+      this.newAlarmClock.hour = this.timePicker.getHours();
+      this.newAlarmClock.minute = this.timePicker.getMinutes();
       console.log("Alarm clock already exist, updating it with val" + this.newAlarmClock);
       this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock).subscribe(
-        success => {          
+        success => {
           this.router.navigate(["alarms"]);
         },
         error => console.log("Error "+ error)
       );
     } else {
+      console.log(this.timePicker);
+      this.newAlarmClock.hour = this.timePicker.getHours();
+      this.newAlarmClock.minute = this.timePicker.getMinutes();
       this.alarmClockService.addAlarmClock(this.newAlarmClock).subscribe(
         success => {
           this.router.navigate(["alarms"]);
@@ -88,5 +95,13 @@ export class AlarmClockFormComponent implements OnInit {
     console.log(webradios);
     this.webradios = webradios;
   }
+
+  setExistingAlarmClock(alarmClock: AlarmClock){
+    this.newAlarmClock = alarmClock;
+    this.timePicker = new Date();
+    this.timePicker.setHours(this.newAlarmClock.hour);
+    this.timePicker.setMinutes(this.newAlarmClock.minute);
+  }
+
 
 }

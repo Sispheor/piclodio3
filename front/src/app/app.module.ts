@@ -24,6 +24,7 @@ import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-cl
 import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-delete-modal.component';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { PopupComponent } from './popup/popup.component';
+import { TimepickerModule } from 'ng2-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PopupComponent } from './popup/popup.component';
     CollapseModule.forRoot(),
     ProgressbarModule.forRoot(),
     AlertModule.forRoot(),
+    TimepickerModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
