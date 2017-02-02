@@ -60,6 +60,7 @@ export class AlarmClockFormComponent implements OnInit {
   onSubmit() {
     console.log("alarms form: onSubmit clicked")
     if (this.existingAlarmClock) {
+      // get hours and minutes for the date picker. the backend want integer for each
       this.newAlarmClock.hour = this.timePicker.getHours();
       this.newAlarmClock.minute = this.timePicker.getMinutes();
       console.log("Alarm clock already exist, updating it with val" + this.newAlarmClock);
