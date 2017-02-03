@@ -11,6 +11,7 @@
         <th class="col-xs-1 text-center">Name</th>
         <th class="col-xs-1 text-center">Day of week</th>
         <th class="col-xs-1 text-center">Time</th>
+        <th class="col-xs-1 text-center">Autostop</th>
         <th class="col-xs-1 text-center">Edit</th>
         <th class="col-xs-1 text-center">Active</th>
         <th class="col-xs-1 text-center">Delete</th>
@@ -29,7 +30,8 @@
             <div class="col-xs-1"><span class="text-{{ alarmclock.sunday ? 'success' : 'muted' }}">Su</span></div>
 
           </td>
-          <td class="col-md-1 text-center">{{alarmclock.hour}}:{{alarmclock.minute}}</td>
+          <td class="col-md-1 text-center">{{ alarmclock.hour < 10 ? '0' : '' }}{{alarmclock.hour}}:{{ alarmclock.minute < 10 ? '0' : '' }}{{alarmclock.minute}}</td>
+          <td class="col-md-1 text-center">{{alarmclock.auto_stop_minutes}}</td>
           <td class="col-md-1 text-center">
             <a [routerLink]="['/alarms', alarmclock.id]" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-edit"></span>

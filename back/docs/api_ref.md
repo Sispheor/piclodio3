@@ -101,21 +101,22 @@ curl -H "Content-Type: application/json" -X PUT -d  '{"id": 4, "name": "new name
 
 **Model detail**
 
-| Parameter | Type    | Choices     | Description                                                             |
-|-----------|---------|-------------|-------------------------------------------------------------------------|
-| id        | integer |             | The unique ID of the object                                             |
-| name      | string  |             | Name of the alarm                                                       |
-| monday    | boolean | true, false | If set, the alarm will be triggered every monday at the selected time   |
-| tuesday   | boolean | true, false | If set, the alarm will be triggered every tuesday at the selected time  |
-| wednesday | boolean | true, false | If set, the alarm will be triggered every wednesdayat the selected time |
-| thursday  | boolean | true, false | If set, the alarm will be triggered every thursdayat the selected time  |
-| friday    | boolean | true, false | If set, the alarm will be triggered every friday at the selected time   |
-| saturday  | boolean | true, false | If set, the alarm will be triggered every saturdayat the selected time  |
-| sunday    | boolean | true, false | If set, the alarm will be triggered every sunday at the selected time   |
-| hour      | integer |             | Hour when the alarm will be scheduled. Must be in range [0:23]          |
-| minute    | integer |             | Minute when the alarm will be scheduled. Must be in range [0:59]        |
-| is_active | boolean | true, false | If set, the alarm is active. Else the alarm is disabled.                |
-| webradio  | integer |             | WebRadio object                                                         |
+| Parameter         | Type    | Choices     | Description                                                                           |
+|-------------------|---------|-------------|---------------------------------------------------------------------------------------|
+| id                | integer |             | The unique ID of the object                                                           |
+| name              | string  |             | Name of the alarm                                                                     |
+| monday            | boolean | true, false | If set, the alarm will be triggered every monday at the selected time                 |
+| tuesday           | boolean | true, false | If set, the alarm will be triggered every tuesday at the selected time                |
+| wednesday         | boolean | true, false | If set, the alarm will be triggered every wednesday at the selected time              |
+| thursday          | boolean | true, false | If set, the alarm will be triggered every thursday at the selected time               |
+| friday            | boolean | true, false | If set, the alarm will be triggered every friday at the selected time                 |
+| saturday          | boolean | true, false | If set, the alarm will be triggered every saturday at the selected time               |
+| sunday            | boolean | true, false | If set, the alarm will be triggered every sunday at the selected time                 |
+| hour              | integer |             | Hour when the alarm will be scheduled. Must be in range [0:23]                        |
+| minute            | integer |             | Minute when the alarm will be scheduled. Must be in range [0:59]                      |
+| is_active         | boolean | true, false | If set, the alarm is active. Else the alarm is disabled.                              |
+| auto_stop_minutes | integer |             | Number of minutes before the web radio is stopped automatically. 0 for never stopped  |
+| webradio          | integer |             | WebRadio object                                                                       |
 
 ### **GET** /alarms/
 Get a list all available alarms.

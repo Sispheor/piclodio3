@@ -25,6 +25,7 @@ export class AlarmClockFormComponent implements OnInit {
   // list of availlable minutes & hours
   minute_list: number[];
   hour_list: number[];
+  max_auto_stop_minute: number[];
   private subscription: Subscription;
 
   constructor(private webRadioService: WebRadioService,
@@ -33,6 +34,8 @@ export class AlarmClockFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
     this.minute_list = this.create_range(59);
     this.hour_list = this.create_range(23);
+    this.max_auto_stop_minute = this.create_range(60);
+
   }
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class AlarmClockFormComponent implements OnInit {
       console.log(this.timePicker);
       this.newAlarmClock.hour = this.timePicker.getHours();
       this.newAlarmClock.minute = this.timePicker.getMinutes();
+      this.newAlarmClock.is_active = true;
       if (this.dayOfWeekChecked()){
         this.alarmClockService.addAlarmClock(this.newAlarmClock).subscribe(
           success => {

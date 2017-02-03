@@ -27,7 +27,7 @@
         <td class="col-xs-1 {{ active_alarm.friday  ? 'success' : '' }}"></td>
         <td class="col-xs-1 {{ active_alarm.saturday  ? 'success' : '' }}"></td>
         <td class="col-xs-1 {{ active_alarm.sunday  ? 'success' : '' }}"></td>
-        <td class="col-xs-1 text-center">{{active_alarm.hour}}:{{active_alarm.minute}}</td>
+        <td class="col-xs-1 text-center">{{ active_alarm.hour < 10 ? '0' : '' }}{{active_alarm.hour}}:{{ active_alarm.minute < 10 ? '0' : '' }}{{active_alarm.minute}}</td>
       </tr>
     </tbody>
   </table>
