@@ -1,8 +1,10 @@
+import { PopupComponent } from './../../popup/popup.component';
+import { error } from 'util';
 import { AlarmClock } from './../alarm-clock';
 import {AlarmClockService} from "../alarm-clock.service";
 import {WebRadioService} from "../../web-radios/web-radio.service";
 import {WebRadio} from "../../web-radios/web-radio";
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {Subscription } from 'rxjs';
 
@@ -18,6 +20,7 @@ export class AlarmClockFormComponent implements OnInit {
   alarmclocks: AlarmClock[];
   existingAlarmClock: boolean = true;
   timePicker: Date;
+  @ViewChild(PopupComponent) popupComponent: PopupComponent;
 
   // list of availlable minutes & hours
   minute_list: number[];
@@ -63,24 +66,33 @@ export class AlarmClockFormComponent implements OnInit {
       // get hours and minutes for the date picker. the backend want integer for each
       this.newAlarmClock.hour = this.timePicker.getHours();
       this.newAlarmClock.minute = this.timePicker.getMinutes();
-      console.log("Alarm clock already exist, updating it with val" + this.newAlarmClock);
-      this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock).subscribe(
-        success => {
-          this.router.navigate(["alarms"]);
-        },
-        error => console.log("Error "+ error)
-      );
+      if (this.dayOfWeekChecked()){
+        console.log("Alarm clock already exist, updating it with val" + this.newAlarmClock);
+        this.alarmClockService.updateAlarmClockById(this.newAlarmClock.id, this.newAlarmClock).subscribe(
+          success => {
+            this.router.navigate(["alarms"]);
+          },
+          error => console.log("Error "+ error)
+        );
+      }else{
+        // show error
+        this.popupComponent.add('danger', 'You must select at least one day of week');
+      }
+
     } else {
       console.log(this.timePicker);
       this.newAlarmClock.hour = this.timePicker.getHours();
       this.newAlarmClock.minute = this.timePicker.getMinutes();
-      this.alarmClockService.addAlarmClock(this.newAlarmClock).subscribe(
-        success => {
-          this.router.navigate(["alarms"]);
-        },
-        error => console.log("Error " + error)
-      );;
-
+      if (this.dayOfWeekChecked()){
+        this.alarmClockService.addAlarmClock(this.newAlarmClock).subscribe(
+          success => {
+            this.router.navigate(["alarms"]);
+          },
+          error => console.log("Error " + error)
+        );;
+      }else{
+        this.popupComponent.add('danger', 'You must select at least one day of week');
+      }
     }
 
   }
@@ -102,6 +114,15 @@ export class AlarmClockFormComponent implements OnInit {
     this.timePicker = new Date();
     this.timePicker.setHours(this.newAlarmClock.hour);
     this.timePicker.setMinutes(this.newAlarmClock.minute);
+  }
+
+  dayOfWeekChecked(){
+    if (this.newAlarmClock.monday || this.newAlarmClock.tuesday || this.newAlarmClock.wednesday || this.newAlarmClock.thursday ||
+        this.newAlarmClock.friday || this.newAlarmClock.saturday || this.newAlarmClock.sunday){
+          console.log("day of week ok");
+      return true;
+    }
+    return false;
   }
 
 
