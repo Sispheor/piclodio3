@@ -9,7 +9,7 @@ import os
 import sys
 import urllib2
 import django
-from webapi.Utils.PlayerManager import CallbackPlayer, ThreadTimeout
+from webapi.Utils.PlayerManager import CallbackPlayer, ThreadTimeout, PlayerManager
 
 
 def is_url_valid(url):
@@ -80,9 +80,12 @@ if is_url_valid(url=web_radio_to_play.url):
                             time_before_auto_kill=minute_before_auto_kill)
     command.run()
 else:
+    PlayerManager.play(url="sounds/cannot_play_web_radio.mp3", blocking_thread=True)
     # the URL is not valid, start the backup MP3 if exist
     if backup_mp3_callback is not None:
+        PlayerManager.play(url="sounds/playing_backup_file.mp3", blocking_thread=True)
         backup_mp3_callback.start()
-
+    else:
+        PlayerManager.play(url="sounds/no_backup_file.mp3", blocking_thread=True)
 
 
