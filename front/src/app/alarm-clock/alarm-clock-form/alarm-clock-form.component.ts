@@ -47,7 +47,8 @@ export class AlarmClockFormComponent implements OnInit {
         if (!alarmClockId) {
           console.log("no id");
           this.existingAlarmClock = false;
-          this.timePicker= new Date()
+          this.timePicker= new Date();
+          this.newAlarmClock.auto_stop_minutes = 0;
           return
         } else {
           console.log("get an id");
