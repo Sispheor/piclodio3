@@ -22,9 +22,9 @@ import { AlarmClockComponent } from './alarm-clock/alarm-clock.component';
 import { WebRadioFormComponent } from './web-radios/web-radio-form/web-radio-form.component';
 import { AlarmClockFormComponent } from './alarm-clock/alarm-clock-form/alarm-clock-form.component';
 import { ConfirmDeleteModalComponent } from './confirm-delete-modal/confirm-delete-modal.component';
-import { FileSelectDirective } from 'ng2-file-upload';
 import { PopupComponent } from './popup/popup.component';
 import { TimepickerModule } from 'ng2-bootstrap/timepicker';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -36,8 +36,7 @@ import { TimepickerModule } from 'ng2-bootstrap/timepicker';
     AlarmClockFormComponent,
     ConfirmDeleteModalComponent,
     OptionComponent,
-    FileSelectDirective,
-    PopupComponent
+    PopupComponent,
   ],
   imports: [
     CollapseModule.forRoot(),
@@ -47,6 +46,7 @@ import { TimepickerModule } from 'ng2-bootstrap/timepicker';
     BrowserModule,
     FormsModule,
     HttpModule,
+    FileUploadModule,
     RouterModule.forRoot([
       {
         path: '',

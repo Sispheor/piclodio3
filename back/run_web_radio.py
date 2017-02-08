@@ -87,5 +87,3 @@ else:
         backup_mp3_callback.start()
     else:
         PlayerManager.play(url="sounds/no_backup_file.mp3", blocking_thread=True)
-
-
