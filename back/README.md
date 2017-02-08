@@ -12,7 +12,7 @@ Install packages
 ```bash
 sudo apt-get update
 sudo apt-get install apt-transport-https
-sudo apt-get install git python-dev mplayer
+sudo apt-get install git python-dev mplayer libasound2-dev
 ```
 
 Install the last release of python pip
@@ -27,11 +27,12 @@ sudo pip install django==1.10.4
 sudo pip install djangorestframework==3.5.3
 sudo pip install django-cors-headers==1.3.1
 sudo pip install gunicorn==19.6.0
+sudo pip install pyalsaaudio==0.8.2
 ```
 
 Clone the project
 ```bash
-
+git clone https://github.com/Sispheor/piclodio3.git
 ```
 
 ## Run the backend
@@ -48,7 +49,12 @@ cd back
 gunicorn --bind 0.0.0.0:8000 piclodio3.wsgi:application
 ```
 
-### Automatically at each startup with systemd
+### Automatically at each startup with systemd (Prod)
+
+Switch the server to prod mode by editing the file `back/piclodio3/settings.py` and update the line that correspond to the debug
+```python
+DEBUG = False
+```
 
 Create and open a Systemd service file for Gunicorn with sudo privileges in your text editor:
 ```bash
@@ -62,8 +68,8 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=gunicorn
-Group=gunicorn
+User=pi
+Group=pi
 WorkingDirectory=/home/pi/piclodio3/back
 ExecStart=gunicorn --bind 0.0.0.0:8000 piclodio3.wsgi:application
 
@@ -73,6 +79,7 @@ WantedBy=multi-user.target
 
 We can now start the Gunicorn service we created and enable it so that it starts at boot:
 ```bash
+sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 ```

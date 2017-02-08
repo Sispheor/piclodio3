@@ -6,7 +6,7 @@ After=network.target
 User=gunicorn
 Group=gunicorn
 WorkingDirectory=/home/pi/piclodio3/back
-ExecStart=gunicorn --bind 0.0.0.0:8000 piclodio3.wsgi:application
+ExecStart=/usr/local/bin/gunicorn --bind 0.0.0.0:8000 piclodio3.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

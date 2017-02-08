@@ -3,7 +3,11 @@ import alsaaudio
 
 class SoundManager(object):
 
-    m = alsaaudio.Mixer()
+    try:
+        m = alsaaudio.Mixer()
+    except alsaaudio.ALSAAudioError:
+        # no master, we are on a Rpi
+        m = alsaaudio.Mixer("PCM")
 
     @classmethod
     def set_volume(cls, volume_level):
