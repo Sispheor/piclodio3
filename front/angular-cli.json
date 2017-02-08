@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.22-1",
+    "version": "1.0.0-beta.30",
     "name": "piclodio3"
   },
   "apps": [
@@ -18,7 +18,8 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "dark-bootstrap.css"
       ],
       "scripts": [],
       "environments": {
@@ -28,7 +29,9 @@
       }
     }
   ],
-  "addons": [],
+  "addons": [
+    "./fonts/*"
+  ],
   "packages": [],
   "e2e": {
     "protractor": {
