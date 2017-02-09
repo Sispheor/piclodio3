@@ -9,9 +9,13 @@ A local backup MP3 file is used in case of losing internet connection or if the 
 
 ## Installation
 
+### Pre-compiled image disk (Raspberry Pi)
+If you want to install it on a Raspberry Pi, you can download the pre-compiled image disk and deploy it on your SD card as usual.
+
+### Manual install
 The project is split in two parts:
-- [Backend (REST API based on Django Rest Framework)](back/README.md)
-- [Frontend (Angular 2 app)](front/README.md)
+- [Backend](back/README.md)
+- [Frontend](front/README.md)
 
 Installation procedures have been tested on a Raspberry Pi and on Ubuntu 16.04 but the project should works on any Linux system that can handle Django and Angular 2.
 
@@ -25,7 +29,7 @@ Take a look to [internet-radio.com](https://www.internet-radio.com/) for a large
 ## Contribute
 
 If you need help you can come on the [Gitter chat room](https://gitter.im/piclodio/Lobby).
-Fell free to open an issue to ask for a feature or raise a bug.
+Fell free to open an issue to ask a new feature or raise a bug.
 
 ## License
 
