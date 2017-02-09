@@ -35,9 +35,13 @@ class PlayerStatus(APIView):
                 if "webradio" in serializer.validated_data:
                     webradio = serializer.validated_data["webradio"]
                     url_to_play = webradio.url
+                    # remove the is_default from other web radio
+                    qs = WebRadio.objects.filter(is_default=True)
+                    qs.update(is_default=False)
                     # the selected web radio become the default one
                     webradio.is_default = True
                     webradio.save()
+
                 else:
                     # get the default web radio if exist
                     try:
