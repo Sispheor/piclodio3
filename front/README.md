@@ -85,5 +85,4 @@ sudo a2ensite piclodio
 sudo service apache2 reload
 ```
 
-
-
+Piclodio is now available from the address IP of your Raspberry Pi.
