@@ -5,6 +5,7 @@ The script can also handle the automatic stop with a second argument.
 How to use: python run_web_radio.py <id_web_radio> [<minutes_before_auto_stop>]
 E.g: python run_web_radio.py 12 20
 """
+import inspect
 import os
 import sys
 import urllib2
@@ -57,6 +58,9 @@ except WebRadio.DoesNotExist:
     print "The web radio id %s does not exist, cannot launch"
     sys.exit()
 
+# get the current script path
+current_script_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
 # try to get a backup mp3 if exists
 backup_mp3_list = BackupMusic.objects.all()
 backup_mp3_path = None
@@ -66,6 +70,7 @@ if backup_mp3_list is not None:
         backup_mp3_path = backup_mp3_list[0].backup_file.url
         print "Path to the backup MP3: %s" % backup_mp3_path
         if backup_mp3_path is not None:
+            backup_mp3_path = current_script_path + os.sep + backup_mp3_path
             backup_mp3_callback = CallbackPlayer(url=backup_mp3_path)
 
 # test the URL, if this one is not valid, we start the backup
@@ -80,10 +85,10 @@ if is_url_valid(url=web_radio_to_play.url):
                             time_before_auto_kill=minute_before_auto_kill)
     command.run()
 else:
-    PlayerManager.play(url="sounds/cannot_play_web_radio.mp3", blocking_thread=True)
+    PlayerManager.play(url=current_script_path + os.sep + "sounds/cannot_play_web_radio.mp3", blocking_thread=True)
     # the URL is not valid, start the backup MP3 if exist
     if backup_mp3_callback is not None:
-        PlayerManager.play(url="sounds/playing_backup_file.mp3", blocking_thread=True)
+        PlayerManager.play(url=current_script_path + os.sep + "sounds/playing_backup_file.mp3", blocking_thread=True)
         backup_mp3_callback.start()
     else:
-        PlayerManager.play(url="sounds/no_backup_file.mp3", blocking_thread=True)
+        PlayerManager.play(url=current_script_path + os.sep + "sounds/no_backup_file.mp3", blocking_thread=True)
