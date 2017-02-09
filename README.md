@@ -10,7 +10,7 @@ A local backup MP3 file is used in case of losing internet connection or if the 
 ## Installation
 
 ### Pre-compiled image disk (Raspberry Pi)
-If you want to install it on a Raspberry Pi, you can download the pre-compiled image disk and deploy it on your SD card as usual.
+If you want to install it on a Raspberry Pi, you can download a [pre-compiled image disk](https://github.com/Sispheor/piclodio3/releases) and deploy it on your SD card as usual.
 
 ### Manual install
 The project is split in two parts:
