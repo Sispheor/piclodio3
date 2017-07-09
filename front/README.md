@@ -32,8 +32,13 @@ sudo npm install
 
 Run the developement server
 ```bash
-ng serve --host 0.0.0.0
+ng serve --host your.ip.addr.ess
 ```
+E.g
+```
+ng serve --host 192.168.0.12
+```
+
 Navigate to `http://serer_ip:4200/`. The app will automatically reload if you change any of the source files.
 
 

@@ -1,6 +1,5 @@
 import { AlarmClock } from '../alarm-clock/alarm-clock';
 import { AlarmClockService } from './../alarm-clock/alarm-clock.service';
-import { DateFormatter } from '@angular/common/src/pipes/intl';
 import { Player } from './../player/player';
 import { PlayerService } from '../player/player.service';
 import { WebRadio } from './../web-radios/web-radio';
@@ -9,6 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {SystemDate} from '../system-date';
 import { WebRadioService } from '../web-radios/web-radio.service';
 import { Observable, Subscription } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 
 @Component({
@@ -57,8 +57,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   incrementDate() {
-    this.clock.setSeconds(this.clock.getSeconds() + 1)
-    this.clockString = DateFormatter.format(this.clock, 'en', 'EEEE, MMMM d, y H:mm:ss');
+    this.clock.setSeconds(this.clock.getSeconds() + 1);
+    this.clockString = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
   }
 
   ngOnDestroy() {

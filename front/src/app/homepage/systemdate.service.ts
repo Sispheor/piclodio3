@@ -1,6 +1,5 @@
 import { GlobalVariable } from './../globals';
 import { Observable } from 'rxjs/Observable';
-import { Console } from '@angular/compiler-cli/src/private_import_core';
 import * as url from 'url';
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';

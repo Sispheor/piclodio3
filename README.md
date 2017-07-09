@@ -26,6 +26,19 @@ You can also get the URL from the console of your web browser. Look for the URL 
 
 Take a look to [internet-radio.com](https://www.internet-radio.com/) for a large selection of web radio sorted by genre.
 
+## Timezone
+
+By default the time is showed in UTC. If you want to change the timezone, update the file `piclodio3/back/piclodio3/settings.py`
+E.g:
+```
+TIME_ZONE = 'Europe/Paris'
+```
+
+Then, restart the backend. Here is the command to type on the Rpi.
+```
+sudo systemctl restart gunicorn
+```
+
 ## Contribute
 
 If you need help you can come on the [Gitter chat room](https://gitter.im/piclodio/Lobby).
