@@ -1,25 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" >
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-      <a class="navbar-brand" routerLink="/homepage">Piclodio</a>
-    </div>
-    <div class="collapse navbar-collapse" [collapse]="isCollapsed" id="navbar-collapse-main">
-      <ul class="nav navbar-nav">
-        <li (click)="isCollapsed = !isCollapsed" class="nav-item" [routerLinkActive]="['active']"><a routerLink="/homepage">Homepage</a></li>
-        <li (click)="isCollapsed = !isCollapsed" class="nav-item" [routerLinkActive]="['active']"><a routerLink="/webradios">Web radios</a></li>
-        <li (click)="isCollapsed = !isCollapsed" class="nav-item" [routerLinkActive]="['active']"><a routerLink="/alarms">Alarms</a></li>
-        <li (click)="isCollapsed = !isCollapsed" class="nav-item" [routerLinkActive]="['active']"><a routerLink="/option">Options</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<app-top-bar></app-top-bar>
 
 <div class="container">
   <router-outlet></router-outlet>
