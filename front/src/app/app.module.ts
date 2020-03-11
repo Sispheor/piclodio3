@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule } from '@angular/router';
+import { globalVariables } from '../globalVariables';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { RouterModule } from '@angular/router';
       { path: '', component: HomepageComponent },
     ])  
   ],
-  providers: [],
+  providers: [globalVariables],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
