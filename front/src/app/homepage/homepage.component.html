@@ -1,10 +1,13 @@
-<h3>Rpi date</h3>
-
-{{ clockString | date: 'HH:mm:ss' }}
-{{ clockString | date: 'EEEE, MMMM dd, yyyy' }}
-
+<h1 class="text-center top-buffer">
+    {{ clockString | date: 'HH:mm:ss' }}
+</h1>
+<h3 class="text-center">
+    {{ clockString | date: 'EEEE, MMMM dd, yyyy' }}
+</h3>
+<br>
+<br>
 <h3>Active alarms</h3>
-<div class="table-responsive">
+<div class="table-responsive table-borderless">
     <table class="table">
         <thead>
             <tr>
@@ -35,4 +38,28 @@
             </tr>
         </tbody>
     </table>
+</div>
+<br>
+<br>
+<h3>Player</h3>
+
+<div *ngIf="playerLoaded">
+    <h2 class="text-center text-{{ player.active == true ? 'success' : 'default' }}"
+        *ngFor="let active_webradio of active_webradios">
+        {{active_webradio.name}}
+    </h2>
+
+
+    <div class="row justify-content-md-center">
+        <div class="col">
+            <button (click)="switchPlayerStatus()" type="button"
+                class="btn btn-{{ player.active == false ? 'success' : 'default' }} btn-lg btn-block">Start</button>
+        </div>
+    </div>
+    <div class="row justify-content-md-center top-buffer">
+        <div class="col">
+            <button (click)="switchPlayerStatus()" type="button"
+                class="btn btn-{{ player.active == true ? 'danger' : 'default' }} btn-lg btn-block">Stop</button>
+        </div>
+    </div>
 </div>
