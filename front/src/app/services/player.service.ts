@@ -9,14 +9,27 @@ import { map } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class PlayerService {
-
+    url = this._globalVariables.BASE_API_URL + "/player/";
 
     constructor(private _globalVariables: globalVariables, private http: HttpClient) { }
 
     getPlayerStatus(): Observable<Player> {
-        let url = this._globalVariables.BASE_API_URL + "/player/";
-        return this.http.get<Player>(url).pipe(
+        
+        return this.http.get<Player>(this.url).pipe(
             map(res => {
+                return res
+            })
+        )  
+    }
+
+    setPlayerStatus(player: Player): Observable<Player> {
+        let body = {
+            "active": player.active,
+            "webradio": player.webradio.id
+        }
+        return this.http.post<Player>(this.url, body).pipe(
+            map(res => {
+                console.log(res);
                 return res
             })
         )  

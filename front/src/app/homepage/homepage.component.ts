@@ -111,4 +111,29 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.playerLoaded = true;
   }
 
+  switchPlayerStatus() {
+    let expected_player = { ...this.player };
+
+    if (expected_player.active) {
+      expected_player.active = false
+    }else{
+      expected_player.active = true
+    }
+    this.playerService.setPlayerStatus(expected_player).subscribe(
+      (value) => {
+        console.log("Updated player ");
+        console.log(value);
+        this.player.active = value.active
+      },
+      (error) => {
+        console.log('Uh-oh, an error occurred!:');
+        console.log(error);
+      },
+      () => {
+        console.log("Observable 'setPlayerStatus' complete");
+      }
+    )
+
+  }
+
 }
