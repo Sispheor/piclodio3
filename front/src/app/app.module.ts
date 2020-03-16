@@ -8,12 +8,14 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule } from '@angular/router';
 import { globalVariables } from '../globalVariables';
+import { WebradioComponent } from './webradio/webradio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    HomepageComponent
+    HomepageComponent,
+    WebradioComponent
   ],
   imports: [
     BrowserModule,
