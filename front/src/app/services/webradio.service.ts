@@ -24,6 +24,18 @@ export class WebRadioService {
             })
         )        
     }
+
+    // POST /webradios
+    addWebRadio(webradio: Webradio): Observable<Webradio> {
+        let url = this._globalVariables.BASE_API_URL + "/webradios/";
+        
+        return this.http.post<Webradio>(url, webradio).pipe(
+            map(res => {
+                console.log(res);
+                return res
+            })
+        )  
+    }
 }
 
 export interface GetWebRadiosResponse extends BaseResponse {

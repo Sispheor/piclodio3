@@ -1,2 +1,47 @@
 <h3>Web radios</h3>
 
+<a routerLink="/webradios/new" class="btn btn-success space-little">
+    <i class="fa fa-plus"></i>
+    Add web radio
+</a>
+<br><br>
+
+<!-- list current web radio -->
+<div class="table-responsive table-borderless">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-xs-1 text-center">Name</th>
+                <th class="col-xs-1 text-center">Play</th>
+                <th class="col-xs-1 text-center">Edit</th>
+                <th class="col-xs-1 text-center">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let webradio of webradios">
+                <td class="col-xs-1 text-center">
+                    {{webradio.name}}
+                </td>
+                <td class="col-xs-1 text-center">
+                    <a (click)="playWebRadio(webradio)" type="button" class="btn btn-success btn-sm">
+                        <i class="fa fa-play"></i>
+                    </a>
+                </td>
+                <td class="col-xs-1 text-center">
+                    <a class="btn btn-info btn-sm" [routerLink]="['/webradios', webradio.id]">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+                <td class="col-xs-1 text-center">
+                    <a (click)="confirmDeleteWebRadio(webradio)" type="button" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 
+<app-confirm-delete-modal [message]="message" [modalConfirmDeleteIsVisible]="modalConfirmDeleteWebRadioIsVisible"
+    (onConfirm)="onConfirm($event)">
+</app-confirm-delete-modal> -->
