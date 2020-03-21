@@ -18,11 +18,22 @@ export class WebRadioService {
     // GET /webradios
     getAllWebRadios(): Observable<Webradio[]> {
         let url = this._globalVariables.BASE_API_URL + "/webradios/";
-        return this.http.get<GetWebRadiosResponse>(url).pipe(
+        return this.http.get<GetListWebRadiosResponse>(url).pipe(
             map(res => {
                 return res.results
             })
         )
+    }
+
+    // GET /webradios/:id
+    getWebRadioById(id: number): Observable<Webradio> {
+        let url = this._globalVariables.BASE_API_URL + "/webradios/" + id;
+        return this.http.get<Webradio>(url).pipe(
+                map(res => {
+                    console.log(res);
+                    return res
+                })
+            )
     }
 
     // POST /webradios
@@ -48,8 +59,19 @@ export class WebRadioService {
             })
         )
     }
+
+    //  PUT /webradios/:id
+    updateWebradio(webradio: Webradio): Observable<Webradio> {
+        let url = this._globalVariables.BASE_API_URL + "/webradios/" + webradio.id + "/";
+        return this.http.put<Webradio>(url, webradio).pipe(
+            map(res => {
+                console.log(res);
+                return res
+            })
+        )
+    }
 }
 
-export interface GetWebRadiosResponse extends BaseResponse {
+export interface GetListWebRadiosResponse extends BaseResponse {
     results: Array<Webradio>;
 }

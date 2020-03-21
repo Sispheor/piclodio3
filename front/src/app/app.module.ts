@@ -39,6 +39,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         path: 'webradios/new',
         component: WebradioFormComponent
       },
+      {
+        path: 'webradios/:id',
+        component: WebradioFormComponent
+      },
     ])
   ],
   providers: [globalVariables],

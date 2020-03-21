@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Webradio } from '../models/webradio';
 import { WebRadioService } from '../services/webradio.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-webradio-form',
@@ -11,21 +12,53 @@ import { Router } from '@angular/router';
 export class WebradioFormComponent implements OnInit {
 
   newWebradio: Webradio = new Webradio();
+  existingWebRadio: Boolean = true;
+  private routeSub: Subscription;
 
   constructor(private webRadioService: WebRadioService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.routeSub = this.activatedRoute.params.subscribe(params => {
+      let webradioId = params['id'];
+      if (!webradioId) {
+        console.log("no webradio id");
+        this.existingWebRadio = false;
+        return
+      } else {
+        this.webRadioService.getWebRadioById(webradioId).subscribe(newWebradio => this.newWebradio = newWebradio,
+          error => console.error('Error: ' + error),
+          () => console.log('Completed!'));
+        console.log(this.newWebradio);
+      }
+    });
+  }
 
   onSubmit() {
-    console.log("Create new web radio");
-    console.log(this.newWebradio);
-    this.webRadioService.addWebRadio(this.newWebradio).subscribe(
-      success => {
-        this.router.navigate(["webradios"]);
-      },
-      error => console.log("Error " + error)
-    )
+    if (this.existingWebRadio){
+      console.log("Update existing web radio");
+      this.webRadioService.updateWebradio(this.newWebradio).subscribe(
+        success => {
+          this.router.navigate(["webradios"]);
+        },
+        error => console.log("Error " + error)
+      );
+
+    }else{
+      console.log("Create new web radio");
+      console.log(this.newWebradio);
+      this.webRadioService.addWebRadio(this.newWebradio).subscribe(
+        success => {
+          this.router.navigate(["webradios"]);
+        },
+        error => console.log("Error " + error)
+      )
+    }
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
 }
