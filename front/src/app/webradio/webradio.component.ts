@@ -1,9 +1,11 @@
+import '@angular/localize/init'
 import { Component, OnInit } from '@angular/core';
 import { Webradio } from '../models/webradio';
 import { WebRadioService } from '../services/webradio.service';
 import { Player } from '../models/player';
 import { PlayerService } from '../services/player.service';
 import { Router } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-webradio',
@@ -13,13 +15,18 @@ import { Router } from '@angular/router';
 export class WebradioComponent implements OnInit {
 
   webradios: Webradio[] = [];
+  webRadioToDelete: Webradio;
+  modalConfirmDeleteWebRadioIsVisible: Boolean = false;
+  message: String;
+  closeResult = '';
 
   constructor(private router: Router,
               private webRadioService: WebRadioService,
-              private playerService: PlayerService) { }
+              private playerService: PlayerService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
+    this.refreshWebRadioList();
   }
 
   setWebRadios(webradios: Webradio[]){
@@ -43,6 +50,45 @@ export class WebradioComponent implements OnInit {
       }
     );
 
+  }
+
+  confirmDeleteWebRadio(content, webradio) {
+    this.webRadioToDelete = webradio;
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      if (result == "confirm click"){
+        this.perform_delete()
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  perform_delete(){
+    this.webRadioService.deleteWebradio(this.webRadioToDelete).subscribe(
+      (success) => this.refreshWebRadioList(),
+      (error) => {
+        console.log("Error " + error)
+      },
+      () => {
+        console.log("Observable 'perform_delete' complete");
+      }
+
+    )
+  }
+
+  refreshWebRadioList(){
+    this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
   }
 
 }

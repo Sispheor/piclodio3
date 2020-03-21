@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { globalVariables } from '../globalVariables';
 import { WebradioComponent } from './webradio/webradio.component';
 import { WebradioFormComponent } from './webradio-form/webradio-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { WebradioFormComponent } from './webradio-form/webradio-form.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent },
       {
@@ -37,7 +39,7 @@ import { WebradioFormComponent } from './webradio-form/webradio-form.component';
         path: 'webradios/new',
         component: WebradioFormComponent
       },
-    ])  
+    ])
   ],
   providers: [globalVariables],
   bootstrap: [AppComponent]

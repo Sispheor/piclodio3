@@ -22,19 +22,31 @@ export class WebRadioService {
             map(res => {
                 return res.results
             })
-        )        
+        )
     }
 
     // POST /webradios
     addWebRadio(webradio: Webradio): Observable<Webradio> {
         let url = this._globalVariables.BASE_API_URL + "/webradios/";
-        
+
         return this.http.post<Webradio>(url, webradio).pipe(
             map(res => {
                 console.log(res);
                 return res
             })
-        )  
+        )
+    }
+
+    // DELETE /webradios/:id
+    deleteWebradio(webradio: Webradio): Observable<any> {
+        let url = this._globalVariables.BASE_API_URL + "/webradios/"+ webradio.id;
+
+        return this.http.delete<Webradio>(url).pipe(
+            map(res => {
+                console.log(res);
+                return res
+            })
+        )
     }
 }
 
