@@ -20,13 +20,19 @@ export class AlarmsService {
       map(res => {
         return res.results
       })
-    )        
+    )
   }
 
-  private log(message: string) {
-    console.log(message)
+  //  PUT /webradios/:id
+  updateAlarm(alarm: Alarm): Observable<Alarm> {
+    let url = this._globalVariables.BASE_API_URL + "/alarmclocks/" + alarm.id + "/";
+    return this.http.put<Alarm>(url, alarm).pipe(
+      map(res => {
+        console.log(res);
+        return res
+      })
+    )
   }
-
 
 }
 

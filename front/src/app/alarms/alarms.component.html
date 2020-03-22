@@ -1,0 +1,53 @@
+<h1>
+    <span>Alarms</span>
+    <button routerLink="/alarms/new" class='btn btn-success pull-right'><i class="fa fa-plus"> </i> New alarm</button>
+</h1>
+<br/>
+
+<!-- <h3>Alarms</h3> -->
+<div class="table-responsive table-borderless">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Days</th>
+                <th scope="col" class="text-center">Time</th>
+                <th scope="col" class="text-center">Autostop</th>
+                <th scope="col" class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let alarm of alarms">
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">{{alarm.name}}</td>
+                <td class="align-middle text-center">
+                    <div class="row justify-content-md-center">
+                        <div class="col-1"><span class="text-{{ alarm.monday ? 'success' : 'muted' }}">Mo</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.tuesday ? 'success' : 'muted' }}">Tu</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.wednesday ? 'success' : 'muted' }}">We</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.thursday ? 'success' : 'muted' }}">Th</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.friday ? 'success' : 'muted' }}">Fr</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.saturday ? 'success' : 'muted' }}">Sa</span></div>
+                        <div class="col-1"><span class="text-{{ alarm.sunday ? 'success' : 'muted' }}">Su</span></div>
+                    </div>
+                </td>
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">
+                    {{ alarm.hour < 10 ? '0' : '' }}{{alarm.hour}}:{{ alarm.minute < 10 ? '0' : '' }}{{alarm.minute}}
+                </td>
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">{{alarm.auto_stop_minutes}}</td>
+                <td class="align-middle text-center">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a (click)="switchAlarmStatus(alarm)" *ngIf="alarm.enabled" class="dropdown-item text-light"><i class="fa fa-bell-slash"></i> Disable</a>
+                            <a (click)="switchAlarmStatus(alarm)" *ngIf="!alarm.enabled" class="dropdown-item text-success"><i class="fa fa-bell"></i> Enable</a>
+                            <a [routerLink]="['/alarms', alarm.id]" class="dropdown-item text-info"><i class="fa fa-edit"></i> Edit</a>
+                            <a class="dropdown-item text-danger"><i class="fa fa-trash"></i> Delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

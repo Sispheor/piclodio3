@@ -12,6 +12,7 @@ import { globalVariables } from '../globalVariables';
 import { WebradioComponent } from './webradio/webradio.component';
 import { WebradioFormComponent } from './webradio-form/webradio-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlarmsComponent } from './alarms/alarms.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TopBarComponent,
     HomepageComponent,
     WebradioComponent,
-    WebradioFormComponent
+    WebradioFormComponent,
+    AlarmsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       {
         path: 'webradios/:id',
         component: WebradioFormComponent
+      },
+      {
+        path: 'alarms',
+        component: AlarmsComponent
       },
     ])
   ],

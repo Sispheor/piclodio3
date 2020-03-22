@@ -9,12 +9,16 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" [routerLinkActive]="['active']">
-                <a class="nav-link" routerLink="/homepage" 
+                <a class="nav-link" routerLink="/homepage"
                 data-toggle="collapse" data-target=".navbar-collapse.show">Homepage</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLinkActive]="['active']" routerLink="/webradios" 
+                <a class="nav-link" [routerLinkActive]="['active']" routerLink="/webradios"
                 data-toggle="collapse" data-target=".navbar-collapse.show">Webradios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLinkActive]="['active']" routerLink="/alarms" data-toggle="collapse"
+                    data-target=".navbar-collapse.show">Alarms</a>
             </li>
         </ul>
     </div>
