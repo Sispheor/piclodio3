@@ -16,6 +16,7 @@ import { Player } from '../models/player';
 export class HomepageComponent implements OnInit, OnDestroy {
   clock: Date;
   clockString: string;
+  cloakLoaded: boolean = false;
   systemDateSubscribption: Subscription;
   clockIncrementSubscription: Subscription;
   active_alarms: Alarm[];
@@ -38,7 +39,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
     // get the player status
     this.playerService.getPlayerStatus().subscribe(this.setPlayerStatus.bind(this));
- 
   }
 
   getBackendDate() {
@@ -65,13 +65,14 @@ export class HomepageComponent implements OnInit, OnDestroy {
       (value) => {
         this.clock.setSeconds(this.clock.getSeconds() + 1)
         this.clockString = this.clock.toString();
+        this.cloakLoaded = true;
       },
       (error) => {
         console.log('Uh-oh, an error occurred! : ' + error);
       },
       () => {
         console.log('Observable complete!');
-      }   
+      }
     );
   }
 
