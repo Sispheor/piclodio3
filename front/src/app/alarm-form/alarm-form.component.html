@@ -1,0 +1,100 @@
+<h1>New alarm</h1>
+<form class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="form">
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" autofocus="" id="name" formControlName="name">
+            <div class="text-danger" *ngIf="form.controls['name'].errors && form.controls['name'].errors.required">Name
+                is required</div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="form-group row" formGroupName="myCheckboxGroup">
+        <label for="name" class="col-sm-2 col-form-label">Day of week</label>
+        <div class="col-sm-10">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="monday" id="monday">
+                <label class="custom-control-label" for="monday">Monday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="tuesday" id="tuesday">
+                <label class="custom-control-label" for="tuesday">Tuesday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="wednesday" id="wednesday">
+                <label class="custom-control-label" for="wednesday">Wednesday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="thursday" id="thursday">
+                <label class="custom-control-label" for="thursday">Thursday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="friday" id="friday">
+                <label class="custom-control-label" for="friday">Friday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="saturday" id="saturday">
+                <label class="custom-control-label" for="saturday">Saturday</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="sunday" id="sunday">
+                <label class="custom-control-label" for="sunday">Sunday</label>
+            </div>
+
+            <div class="text-danger"
+                *ngIf="form.controls['myCheckboxGroup'].errors && form.controls['myCheckboxGroup'].errors.requireCheckboxesToBeChecked">
+                At least one checkbox is required to check</div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="time" class="col-sm-2 col-form-label">Time</label>
+        <div class="col-sm-10">
+            <div class="d-flex justify-content-center" >
+                <label for="time">
+                    <ngb-timepicker name="time" formControlName="time"></ngb-timepicker>
+                </label>
+            </div>
+            <div class="d-flex justify-content-center text-danger"
+                *ngIf="form.controls['time'].errors && form.controls['time'].errors.required">
+                Time is required</div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="auto_stop_minutes" class="col-sm-2 col-form-label">Auto stop minutes</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" autofocus="" id="auto_stop_minutes" formControlName="auto_stop_minutes">
+            <div class="text-danger"
+                *ngIf="form.controls['auto_stop_minutes'].errors && form.controls['auto_stop_minutes'].errors.required">
+                Auto stop minutes need to be set. '0' to disable.</div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="webradio" class="col-sm-2 control-label">Web radio</label>
+        <div class="col-sm-10">
+            <select class="form-control" id="webradio" formControlName="webradio">
+                <option *ngFor="let webradio of webradios" [ngValue]="webradio.id">{{ webradio.name }}</option>
+            </select>
+            <div class="text-danger"
+                *ngIf="form.controls['webradio'].errors && form.controls['webradio'].errors.required">
+                A web radio is required</div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="button" class="col-sm-2 control-label"></label>
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid">{{ newAlarm.id == null ? 'Add' : 'Update' }}</button>
+        </div>
+    </div>
+</form>

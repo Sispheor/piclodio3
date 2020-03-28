@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let alarm of alarms">
-                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">{{alarm.name}}</td>
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'success' : 'muted' }}">{{alarm.name}}</td>
                 <td class="align-middle text-center">
                     <div class="row justify-content-md-center">
                         <div class="col-1"><span class="text-{{ alarm.monday ? 'success' : 'muted' }}">Mo</span></div>
@@ -30,10 +30,10 @@
                         <div class="col-1"><span class="text-{{ alarm.sunday ? 'success' : 'muted' }}">Su</span></div>
                     </div>
                 </td>
-                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'success' : 'muted' }}">
                     {{ alarm.hour < 10 ? '0' : '' }}{{alarm.hour}}:{{ alarm.minute < 10 ? '0' : '' }}{{alarm.minute}}
                 </td>
-                <td class="align-middle text-center text-{{ alarm.enabled ? 'light' : 'muted' }}">{{alarm.auto_stop_minutes}}</td>
+                <td class="align-middle text-center text-{{ alarm.enabled ? 'success' : 'muted' }}">{{alarm.auto_stop_minutes}}</td>
                 <td class="align-middle text-center">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"

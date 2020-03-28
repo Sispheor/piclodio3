@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomepageComponent } from './homepage/homepage.component';
 import { globalVariables } from '../globalVariables';
 import { WebradioComponent } from './webradio/webradio.component';
 import { WebradioFormComponent } from './webradio-form/webradio-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmsComponent } from './alarms/alarms.component';
+import { AlarmFormComponent } from './alarm-form/alarm-form.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AlarmsComponent } from './alarms/alarms.component';
     HomepageComponent,
     WebradioComponent,
     WebradioFormComponent,
-    AlarmsComponent
+    AlarmsComponent,
+    AlarmFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { AlarmsComponent } from './alarms/alarms.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent },
@@ -48,6 +51,10 @@ import { AlarmsComponent } from './alarms/alarms.component';
       {
         path: 'alarms',
         component: AlarmsComponent
+      },
+      {
+        path: 'alarms/new',
+        component: AlarmFormComponent
       },
     ])
   ],

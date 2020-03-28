@@ -34,6 +34,18 @@ export class AlarmsService {
     )
   }
 
+  //  POST /webradios/
+  createAlarm(alarm: Alarm): Observable<Alarm> {
+    let url = this._globalVariables.BASE_API_URL + "/alarmclocks/";
+    return this.http.post<Alarm>(url, alarm).pipe(
+      map(res => {
+        console.log(res);
+        return res
+      })
+    )
+  }
+
+
 }
 
 export interface GetAlarmsResponse extends BaseResponse  {
