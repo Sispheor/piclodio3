@@ -23,7 +23,18 @@ export class AlarmsService {
     )
   }
 
-  //  PUT /webradios/:id
+  // GET /alarmclocks/:id
+  getAlarmById(id: number): Observable<Alarm> {
+    let url = this._globalVariables.BASE_API_URL + "/alarmclocks/" + id;
+    return this.http.get<Alarm>(url).pipe(
+      map(res => {
+        console.log(res);
+        return res
+      })
+    )
+  }
+
+  //  PUT /alarmclocks/:id
   updateAlarm(alarm: Alarm): Observable<Alarm> {
     let url = this._globalVariables.BASE_API_URL + "/alarmclocks/" + alarm.id + "/";
     return this.http.put<Alarm>(url, alarm).pipe(

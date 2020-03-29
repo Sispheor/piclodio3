@@ -56,6 +56,10 @@ import { AlarmFormComponent } from './alarm-form/alarm-form.component';
         path: 'alarms/new',
         component: AlarmFormComponent
       },
+      {
+        path: 'alarms/:id',
+        component: AlarmFormComponent
+      },
     ])
   ],
   providers: [globalVariables],

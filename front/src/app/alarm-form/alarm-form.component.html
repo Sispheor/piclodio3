@@ -11,7 +11,7 @@
     </div>
 
     <br/>
-    <div class="form-group row" formGroupName="myCheckboxGroup">
+    <div class="form-group row" formGroupName="dayOfWeekCheckboxGroup">
         <label for="name" class="col-sm-2 col-form-label">Day of week</label>
         <div class="col-sm-10">
             <div class="custom-control custom-checkbox">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="text-danger"
-                *ngIf="form.controls['myCheckboxGroup'].errors && form.controls['myCheckboxGroup'].errors.requireCheckboxesToBeChecked">
+                *ngIf="form.controls['dayOfWeekCheckboxGroup'].errors && form.controls['dayOfWeekCheckboxGroup'].errors.requireCheckboxesToBeChecked">
                 At least one checkbox is required to check</div>
         </div>
     </div>
