@@ -43,7 +43,7 @@
                             <a (click)="switchAlarmStatus(alarm)" *ngIf="alarm.enabled" class="dropdown-item text-light"><i class="fa fa-bell-slash"></i> Disable</a>
                             <a (click)="switchAlarmStatus(alarm)" *ngIf="!alarm.enabled" class="dropdown-item text-success"><i class="fa fa-bell"></i> Enable</a>
                             <a [routerLink]="['/alarms', alarm.id]" class="dropdown-item text-info"><i class="fa fa-edit"></i> Edit</a>
-                            <a class="dropdown-item text-danger"><i class="fa fa-trash"></i> Delete</a>
+                            <a (click)="confirmDeleteAlarm(alarm)" class="dropdown-item text-danger"><i class="fa fa-trash"></i> Delete</a>
                         </div>
                     </div>
                 </td>

@@ -14,6 +14,7 @@ import { WebradioFormComponent } from './webradio-form/webradio-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmsComponent } from './alarms/alarms.component';
 import { AlarmFormComponent } from './alarm-form/alarm-form.component';
+import { ModalConfirmDeletionComponent } from './modal-confirm-deletion/modal-confirm-deletion.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AlarmFormComponent } from './alarm-form/alarm-form.component';
     WebradioComponent,
     WebradioFormComponent,
     AlarmsComponent,
-    AlarmFormComponent
+    AlarmFormComponent,
+    ModalConfirmDeletionComponent
   ],
   imports: [
     BrowserModule,

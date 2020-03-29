@@ -45,7 +45,7 @@ export class AlarmsService {
     )
   }
 
-  //  POST /webradios/
+  //  POST /alarmclocks/
   createAlarm(alarm: Alarm): Observable<Alarm> {
     let url = this._globalVariables.BASE_API_URL + "/alarmclocks/";
     return this.http.post<Alarm>(url, alarm).pipe(
@@ -56,6 +56,16 @@ export class AlarmsService {
     )
   }
 
+  // DELETE /alarmclocks/:id
+  deleteAlarm(alarm: Alarm): Observable<any> {
+    let url = this._globalVariables.BASE_API_URL + "/alarmclocks/" + alarm.id;
+    return this.http.delete<Alarm>(url).pipe(
+      map(res => {
+        console.log(res);
+        return res
+      })
+    )
+  }
 
 }
 

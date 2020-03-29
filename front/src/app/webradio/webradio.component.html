@@ -31,7 +31,7 @@
                     </a>
                 </td>
                 <td class="col-xs-1 text-center">
-                    <a (click)="confirmDeleteWebRadio(content, webradio)" type="button" class="btn btn-danger btn-sm">
+                    <a (click)="confirmDeleteWebRadio(webradio)" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -39,19 +39,3 @@
         </tbody>
     </table>
 </div>
-
-<ng-template #content let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Confirm deletion</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Please confirm the deletion of the webradio {{ webRadioToDelete.name }}</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modal.close('cancel click')">Close</button>
-        <button type="button" class="btn btn-danger" (click)="modal.close('confirm click')">Delete</button>
-    </div>
-</ng-template>

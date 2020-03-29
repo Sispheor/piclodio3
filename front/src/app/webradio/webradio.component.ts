@@ -6,6 +6,7 @@ import { Player } from '../models/player';
 import { PlayerService } from '../services/player.service';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfirmDeletionComponent } from '../modal-confirm-deletion/modal-confirm-deletion.component';
 
 @Component({
   selector: 'app-webradio',
@@ -52,11 +53,13 @@ export class WebradioComponent implements OnInit {
 
   }
 
-  confirmDeleteWebRadio(content, webradio) {
+  confirmDeleteWebRadio(webradio) {
     this.webRadioToDelete = webradio;
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    const modalRef = this.modalService.open(ModalConfirmDeletionComponent);
+    modalRef.componentInstance.name = webradio.name;
+    modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-      if (result == "confirm click"){
+      if (result == "confirm click") {
         this.perform_delete()
       }
     }, (reason) => {
@@ -83,7 +86,6 @@ export class WebradioComponent implements OnInit {
       () => {
         console.log("Observable 'perform_delete' complete");
       }
-
     )
   }
 
