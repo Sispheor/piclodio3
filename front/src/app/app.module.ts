@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlarmsComponent } from './alarms/alarms.component';
 import { AlarmFormComponent } from './alarm-form/alarm-form.component';
 import { ModalConfirmDeletionComponent } from './modal-confirm-deletion/modal-confirm-deletion.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ModalConfirmDeletionComponent } from './modal-confirm-deletion/modal-co
     WebradioFormComponent,
     AlarmsComponent,
     AlarmFormComponent,
-    ModalConfirmDeletionComponent
+    ModalConfirmDeletionComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,10 @@ import { ModalConfirmDeletionComponent } from './modal-confirm-deletion/modal-co
       {
         path: 'alarms/:id',
         component: AlarmFormComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       },
     ])
   ],

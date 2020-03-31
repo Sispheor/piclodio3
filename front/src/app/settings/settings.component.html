@@ -1,0 +1,24 @@
+<h1>
+    <span>Settings</span>
+</h1>
+<br />
+
+<div *ngIf="volumeLoaded" class="justify-content-center">
+    <p>
+        <ngb-progressbar type="success" [value]="volume.volume"></ngb-progressbar>
+    </p>
+    <div class="row justify-content-center">
+        <div class="col col-lg-2">
+            <button (click)="volumeDown()" class='btn btn-primary btn-lg btn-block'>
+                <i class="fa fa-volume-down"></i></button>
+        </div>
+        <div class="col col-lg-2">
+            <button (click)="volumeUp()" class='btn btn-primary btn-lg btn-block'>
+                <i class="fa fa-volume-up"></i></button>
+        </div>
+    </div>
+</div>
+
+
+
+
