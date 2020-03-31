@@ -2,7 +2,7 @@
     <span>Settings</span>
 </h1>
 <br />
-
+<h3>Volume</h3>
 <div *ngIf="volumeLoaded" class="justify-content-center">
     <p>
         <ngb-progressbar type="success" [value]="volume.volume"></ngb-progressbar>
@@ -18,7 +18,12 @@
         </div>
     </div>
 </div>
-
-
-
+<br />
+<h3>Backup MP3</h3>
+<div *ngIf="backupFileName">
+    Current file: <div class="text-success">{{ backupFileName }}</div>
+</div>
+<div *ngIf="!backupFileName">
+    <div class="text-danger"><i class="fa fa-exclamation-triangle"></i> No backup file set</div>
+</div>
 

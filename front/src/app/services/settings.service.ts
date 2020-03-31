@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { globalVariables, BASE_API_URL } from '../../globalVariables';
 import { map } from 'rxjs/operators';
 import { Volume } from '../models/volume';
+import { Backup } from '../models/backup';
 
 @Injectable({
     providedIn: 'root'
@@ -24,10 +25,19 @@ export class SettingsService {
         )
     }
 
-    // GET /volume
+    // POST /volume
     setVolume(volume: Volume): Observable<Volume> {
         let url = this._globalVariables.BASE_API_URL + "/volume/";
         return this.http.post<Volume>(url, volume).pipe(
+            map(res => {
+                return res
+            })
+        )
+    }
+
+    getBackup(): Observable<Backup[]> {
+        let url = this._globalVariables.BASE_API_URL + "/backup/";
+        return this.http.get<Backup[]>(url).pipe(
             map(res => {
                 return res
             })

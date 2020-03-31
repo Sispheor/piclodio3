@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 import { Volume } from '../models/volume';
+import { Backup } from '../models/backup';
 
 @Component({
   selector: 'app-settings',
@@ -10,21 +11,36 @@ import { Volume } from '../models/volume';
 export class SettingsComponent implements OnInit {
 
   volumeLoaded = false;
-  volume: Volume = { volume: "0"}
+  volume: Volume = { volume: "0"};
+  backupFileName: string = ""
 
   constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
-    this.refreshVolume()
+    this.refreshVolume();
+    this.refreshBackup();
   }
 
   refreshVolume() {
     this.settingsService.getVolume().subscribe(this.setVolume.bind(this));
   }
+  refreshBackup() {
+    this.settingsService.getBackup().subscribe(this.setBackup.bind(this));
+  }
 
   setVolume(volume: Volume) {
     this.volume = volume;
     this.volumeLoaded = true;
+  }
+
+  setBackup(backupList: Backup[]){
+    if (typeof backupList !== 'undefined' && backupList.length > 0) {
+      // the array is defined and has at least one element
+      console.log(backupList[0]);
+      // we receive a complete path that contain the root path and the file name. let's keep only the file name
+      let tmpBackup = backupList[0];
+      this.backupFileName = tmpBackup.backup_file.split('/')[1];
+    }
   }
 
   volumeDown() {
