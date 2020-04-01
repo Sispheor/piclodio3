@@ -44,4 +44,16 @@ export class SettingsService {
         )
     }
 
+    postFile(fileToUpload: File): Observable<boolean> {
+        let url = this._globalVariables.BASE_API_URL + "/backup/";
+        const formData: FormData = new FormData();
+        console.log(fileToUpload);
+        formData.append('backup_file', fileToUpload, fileToUpload.name);
+        return this.http.post(url, formData).pipe(
+                map(() => {
+                    return true;
+                })
+            )
+    }
+
 }

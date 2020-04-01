@@ -20,10 +20,33 @@
 </div>
 <br />
 <h3>Backup MP3</h3>
-<div *ngIf="backupFileName">
-    Current file: <div class="text-success">{{ backupFileName }}</div>
-</div>
-<div *ngIf="!backupFileName">
-    <div class="text-danger"><i class="fa fa-exclamation-triangle"></i> No backup file set</div>
-</div>
 
+<div class="table-responsive table-borderless">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-xs-1">Current file</th>
+                <th class="col-xs-1">Select</th>
+                <th class="col-xs-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div *ngIf="backupFileName">
+                        <div class="text-success">{{ backupFileName }}</div>
+                    </div>
+                    <div *ngIf="!backupFileName">
+                        <div class="text-danger"><i class="fa fa-exclamation-triangle"></i> No backup file set</div>
+                    </div>
+                </td>
+                <td>
+                    <input type="file" id="file" class="form-control-file" (change)="handleFileInput($event.target.files)">
+                </td>
+                <td>
+                    <button (click)="uploadFileToActivity()" class="btn btn-success">Upload</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

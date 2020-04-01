@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit {
   volumeLoaded = false;
   volume: Volume = { volume: "0"};
   backupFileName: string = ""
+  fileToUpload: File = null;
 
   constructor(private settingsService: SettingsService) { }
 
@@ -79,6 +80,18 @@ export class SettingsComponent implements OnInit {
         error => console.log("Error " + error)
       );
     }
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
+
+  uploadFileToActivity() {
+    this.settingsService.postFile(this.fileToUpload).subscribe(data => {
+      this.refreshBackup();
+    }, error => {
+      console.log(error);
+    });
   }
 }
 
