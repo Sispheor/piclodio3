@@ -3,6 +3,7 @@ import { Webradio } from '../models/webradio';
 import { WebRadioService } from '../services/webradio.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-webradio-form',
@@ -17,7 +18,8 @@ export class WebradioFormComponent implements OnInit {
 
   constructor(private webRadioService: WebRadioService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              public toastService: ToastService) { }
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
@@ -40,9 +42,13 @@ export class WebradioFormComponent implements OnInit {
       console.log("Update existing web radio");
       this.webRadioService.updateWebradio(this.newWebradio).subscribe(
         success => {
+          this.toastService.show('Web radio updated', { classname: 'bg-info text-light', delay: 5000 });
           this.router.navigate(["webradios"]);
         },
-        error => console.log("Error " + error)
+        error => {
+          console.log("Error " + error);
+          this.toastService.show('Error', { classname: 'bg-danger text-light', delay: 5000 });
+        }
       );
 
     }else{
@@ -50,9 +56,13 @@ export class WebradioFormComponent implements OnInit {
       console.log(this.newWebradio);
       this.webRadioService.addWebRadio(this.newWebradio).subscribe(
         success => {
+          this.toastService.show('Web radio created', { classname: 'bg-info text-light', delay: 5000 });
           this.router.navigate(["webradios"]);
         },
-        error => console.log("Error " + error)
+        error => {
+          console.log("Error " + error);
+          this.toastService.show('Error', { classname: 'bg-danger text-light', delay: 5000 });
+        }
       )
     }
   }

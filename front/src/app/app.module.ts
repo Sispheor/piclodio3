@@ -16,6 +16,7 @@ import { AlarmsComponent } from './alarms/alarms.component';
 import { AlarmFormComponent } from './alarm-form/alarm-form.component';
 import { ModalConfirmDeletionComponent } from './modal-confirm-deletion/modal-confirm-deletion.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ToastsContainer } from './toast-container.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SettingsComponent } from './settings/settings.component';
     AlarmsComponent,
     AlarmFormComponent,
     ModalConfirmDeletionComponent,
-    SettingsComponent
+    SettingsComponent,
+    ToastsContainer
   ],
   imports: [
     BrowserModule,

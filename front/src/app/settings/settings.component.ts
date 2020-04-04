@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 import { Volume } from '../models/volume';
 import { Backup } from '../models/backup';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +16,8 @@ export class SettingsComponent implements OnInit {
   backupFileName: string = ""
   fileToUpload: File = null;
 
-  constructor(private settingsService: SettingsService) { }
+  constructor(private settingsService: SettingsService,
+              public toastService: ToastService) { }
 
   ngOnInit(): void {
     this.refreshVolume();
@@ -88,9 +90,11 @@ export class SettingsComponent implements OnInit {
 
   uploadFileToActivity() {
     this.settingsService.postFile(this.fileToUpload).subscribe(data => {
+      this.toastService.show('File uploaded successfully', { classname: 'bg-info text-light', delay: 5000 });
       this.refreshBackup();
     }, error => {
       console.log(error);
+      this.toastService.show('Error while uploading', { classname: 'bg-danger text-light', delay: 5000 });
     });
   }
 }

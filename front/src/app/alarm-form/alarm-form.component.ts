@@ -6,6 +6,7 @@ import { FormGroup, FormControl, ValidatorFn, Validators  } from '@angular/forms
 import { AlarmsService } from '../services/alarms.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-alarm-form',
@@ -31,7 +32,8 @@ export class AlarmFormComponent implements OnInit {
   constructor(private webRadioService: WebRadioService,
               private alarmService: AlarmsService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              public toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -122,11 +124,12 @@ export class AlarmFormComponent implements OnInit {
       // update new alarm
       this.alarmService.updateAlarm(this.newAlarm).subscribe(
         success => {
+          this.toastService.show('Alarm updated', { classname: 'bg-info text-light', delay: 5000 });
           this.router.navigate(["alarms"]);
         },
         error => {
-          console.log("Error updating alarm");
           console.log(error);
+          this.toastService.show('Error', { classname: 'bg-danger text-light', delay: 5000 });
         }
       )
 
@@ -134,11 +137,12 @@ export class AlarmFormComponent implements OnInit {
       // create existing alarm
       this.alarmService.createAlarm(this.newAlarm).subscribe(
         success => {
+          this.toastService.show('Alarm created', { classname: 'bg-info text-light', delay: 5000 });
           this.router.navigate(["alarms"]);
         },
         error => {
-          console.log("Error creating new alarm");
           console.log(error);
+          this.toastService.show('Error', { classname: 'bg-danger text-light', delay: 5000 });
         }
       )
     }
