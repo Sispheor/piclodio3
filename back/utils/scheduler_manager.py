@@ -35,7 +35,7 @@ class SchedulerManager(object, metaclass=Singleton):
         from restapi.models.backup_file import BackupFile
         backup_files = BackupFile.objects.all()
         backup_file_path = None
-        if backup_files is not None:
+        if backup_files is not None and len(backup_files) > 0:
             backup_file_path = backup_files[0].backup_file.url
             print("Path to the backup MP3: {}".format(backup_file_path))
         print("play_web_radio triggered by scheduler")
