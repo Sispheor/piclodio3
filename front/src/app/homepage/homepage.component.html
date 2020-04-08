@@ -19,28 +19,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="col-xs-1 text-center">Name</th>
-                <th class="col-xs-1 text-center">Mo</th>
-                <th class="col-xs-1 text-center">Tu</th>
-                <th class="col-xs-1 text-center">We</th>
-                <th class="col-xs-1 text-center">Th</th>
-                <th class="col-xs-1 text-center">Fr</th>
-                <th class="col-xs-1 text-center">Sa</th>
-                <th class="col-xs-1 text-center">Su</th>
-                <th class="col-xs-1 text-center">Time</th>
+                <th class="col-1 text-center">Name</th>
+                <th class="col-1 text-center">Mo</th>
+                <th class="col-1 text-center">Tu</th>
+                <th class="col-1 text-center">We</th>
+                <th class="col-1 text-center">Th</th>
+                <th class="col-1 text-center">Fr</th>
+                <th class="col-1 text-center">Sa</th>
+                <th class="col-1 text-center">Su</th>
+                <th class="col-1 text-center">Time</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let active_alarm of active_alarms">
-                <td class="col-xs-1 text-center">{{active_alarm.name}}</td>
-                <td class="col-xs-1 {{ active_alarm.monday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.tuesday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.wednesday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.thursday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.friday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.saturday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 {{ active_alarm.sunday  ? 'table-success' : '' }}"></td>
-                <td class="col-xs-1 text-center">
+                <td class="col-1 text-center">{{active_alarm.name}}</td>
+                <td class="col-1 {{ active_alarm.monday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.tuesday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.wednesday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.thursday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.friday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.saturday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 {{ active_alarm.sunday  ? 'table-success' : '' }}"></td>
+                <td class="col-1 text-center">
                     {{ active_alarm.hour < 10 ? '0' : '' }}{{active_alarm.hour}}:{{ active_alarm.minute < 10 ? '0' : '' }}{{active_alarm.minute}}
                 </td>
             </tr>

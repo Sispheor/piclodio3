@@ -5,19 +5,24 @@ Piclodio is a web radio player and a also an alarm clock that can be installed o
 You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 A local backup MP3 file is used in case of losing internet connection or if the web radio is not anymore available to be sure you'll be awaken.
 
-![piclodio_home](https://github.com/Sispheor/piclodio3/blob/dev/images/picliodio_presentation.png)
+![homepage](https://github.com/Sispheor/piclodio3/blob/dev/images/homepage.png)
 
 ## Installation
 
-### Pre-compiled image disk (Raspberry Pi)
-If you want to install it on a Raspberry Pi, you can download a [pre-compiled image disk](https://github.com/Sispheor/piclodio3/releases) and deploy it on your SD card as usual.
+### Via Docker
+
+The project can be deployed via the provided docker compose file.
+```
+
+```
 
 ### Manual install
-The project is split in two parts:
-- [Backend](back/README.md)
-- [Frontend](front/README.md)
 
-Installation procedures have been tested on a Raspberry Pi and on Ubuntu 16.04 but the project should works on any Linux system that can handle Django and Angular 2.
+The project is split in two parts:
+- [Backend based on Django Rest Framework](back/README.md)
+- [Frontend based on Angular 9](front/README.md)
+
+Installation procedures have been tested on a Raspberry Pi and on Ubuntu 18.04/20.04 but the project should works on any Linux system that can handle Django and Angular 2.
 
 ## Web Radio URLs
 

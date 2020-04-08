@@ -8,3 +8,4 @@ sqlalchemy==1.3.13
 psutil==5.7.0
 pyalsaaudio==0.8.4
 django-cors-headers==3.2.1
+gunicorn==20.0.4
