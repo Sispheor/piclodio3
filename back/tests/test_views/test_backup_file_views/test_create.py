@@ -22,8 +22,9 @@ class TestCreate(APITestCase):
         # settings.MEDIA_ROOT = tempfile.mkdtemp()
 
     def tearDown(self) -> None:
-        if os.path.exists(self.valid_file):
-            os.remove(self.valid_file)
+        path = os.path.join(settings.MEDIA_ROOT, 'backup_mp3/test_upload.mp3')
+        if os.path.exists(path):
+            os.remove(path)
 
     @staticmethod
     def _create_test_file(path):
