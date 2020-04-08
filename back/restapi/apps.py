@@ -13,7 +13,7 @@ class RestapiConfig(AppConfig):
 
     def ready(self):
         argv = sys.argv
-        if "makemigrations" not in argv and "migrate" not in argv:
+        if "makemigrations" not in argv and "migrate" not in argv and "collectstatic" not in argv:
             # start the scheduler
             scheduler_manager = SchedulerManager()
             scheduler_manager.start()

@@ -5,24 +5,28 @@ Piclodio is a web radio player and a also an alarm clock that can be installed o
 You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 A local backup MP3 file is used in case of losing internet connection or if the web radio is not anymore available to be sure you'll be awaken.
 
-![homepage](https://github.com/Sispheor/piclodio3/blob/dev/images/homepage.png)
+![homepage](images/homepage.png)
 
 ## Installation
 
 ### Via Docker
 
-The project can be deployed via the provided docker compose file.
+The project can be deployed via the provided docker compose file. Check [this doc](doc/install_docker_rpi.md) to install Docker and docker-compose on your RPI.
+```
+git clone https://github.com/Sispheor/piclodio3.git
+cd piclodio3
+docker-compose up
 ```
 
-```
+Then access the UI via you web broswer with the IP of your host (type `ip a` to get it). E.g: "http://192.168.0.22/"
 
-### Manual install
+### Development env
 
 The project is split in two parts:
 - [Backend based on Django Rest Framework](back/README.md)
 - [Frontend based on Angular 9](front/README.md)
 
-Installation procedures have been tested on a Raspberry Pi and on Ubuntu 18.04/20.04 but the project should works on any Linux system that can handle Django and Angular 2.
+Installation procedures have been tested on a Raspberry Pi and on Ubuntu 18.04/20.04 but the project should works on any Linux system that can handle Django and Angular.
 
 ## Web Radio URLs
 
@@ -30,6 +34,10 @@ There is a lot of web radio online. In most of case, websites provide a `pls` or
 You can also get the URL from the console of your web browser. Look for the URL that consume the most brandwith in the network console.
 
 Take a look to [internet-radio.com](https://www.internet-radio.com/) for a large selection of web radio sorted by genre.
+
+## API doc
+
+You can accees to API doc on the "/redoc" URL.
 
 ## Timezone
 
@@ -39,10 +47,16 @@ E.g:
 TIME_ZONE = 'Europe/Paris'
 ```
 
-Then, restart the backend. Here is the command to type on the Rpi.
+## Raspberry output jack
+
+To set the audio out to jack instead of HDMI:
 ```
-sudo systemctl restart gunicorn
+amixer cset numid=3 1
 ```
+
+- 1: Jack
+- 2: HDMI
+- 3: auto
 
 ## Contribute
 

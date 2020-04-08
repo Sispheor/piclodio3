@@ -1,3 +1,11 @@
+# django
+*.log
+*.pot
+*.pyc
+__pycache__
+db/db.sqlite3
+static
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -58,7 +66,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+db/db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
