@@ -7,6 +7,7 @@ services:
     image: piclodio-back
     volumes:
       - /tmp/static:/code/static
+      - ${PWD}/piclodio_db:/code/db
     devices:
       - /dev/snd:/dev/snd # audio control
     ports:
