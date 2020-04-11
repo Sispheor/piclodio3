@@ -3,8 +3,7 @@ version: "3.7"
 services:
 
   backend:
-    build: back
-    image: piclodio-back
+    image: sispheor/piclodio-back
     volumes:
       - /tmp/static:/code/static
       - ${PWD}/piclodio_db:/code/db
@@ -14,8 +13,7 @@ services:
       - "8000:8000"
 
   frontend:
-    build: front
-    image: piclodio-front
+    image: sispheor/piclodio-front
     ports:
       - "80:80"
     volumes:
