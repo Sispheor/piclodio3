@@ -1,0 +1,36 @@
+- model: restapi.webradio
+  pk: 1
+  fields:
+    name: Asterix Radio
+    url: http://192.99.17.12:6410/
+    is_default: true
+- model: restapi.webradio
+  pk: 2
+  fields:
+    name: MoveDaHouse
+    url: http://212.71.250.12:8000/stream
+    is_default: false
+- model: restapi.webradio
+  pk: 3
+  fields:
+    name: RTL2
+    url: http://streaming.radio.rtl2.fr/rtl2-1-48-192
+    is_default: false
+- model: restapi.webradio
+  pk: 4
+  fields:
+    name: Skyrock
+    url:  http://www.skyrock.fm/stream.php/tunein16_128mp3.mp3
+    is_default: false
+- model: restapi.webradio
+  pk: 5
+  fields:
+    name: BBC
+    url:  http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p
+    is_default: false
+- model: restapi.webradio
+  pk: 6
+  fields:
+    name: Hot Radio Grenoble
+    url:  http://st8.hotradio.fr/14
+    is_default: false

@@ -34,6 +34,7 @@ There is a lot of web radio online. In most of case, websites provide a `pls` or
 You can also get the URL from the console of your web browser. Look for the URL that consume the most brandwith in the network console.
 
 Take a look to [internet-radio.com](https://www.internet-radio.com/) for a large selection of web radio sorted by genre.
+Or [fluxradios](http://fluxradios.blogspot.com/).
 
 ## API doc
 
