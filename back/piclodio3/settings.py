@@ -78,6 +78,8 @@ WSGI_APPLICATION = 'piclodio3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DB_DIR = os.path.join(BASE_DIR, 'db')
+if not os.path.exists(DB_DIR):
+    os.makedirs(DB_DIR)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

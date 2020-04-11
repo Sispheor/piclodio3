@@ -13,8 +13,9 @@ class RestapiConfig(AppConfig):
 
     def ready(self):
         argv = sys.argv
+        print(argv)
         list_banned_argument = ["makemigrations", "migrate", "collectstatic", "dumpdata", "loaddata"]
-        if [i for i in list_banned_argument if i not in argv]:
+        if not any(x in list_banned_argument for x in argv):
             # start the scheduler
             scheduler_manager = SchedulerManager()
             scheduler_manager.start()
