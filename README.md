@@ -15,7 +15,7 @@ The project can be deployed via the provided docker compose file. Check [this do
 ```
 git clone https://github.com/Sispheor/piclodio3.git
 cd piclodio3
-docker-compose up
+docker-compose up -d
 ```
 
 Then access the UI via you web broswer with the IP of your host (type `ip a` to get it). E.g: "http://192.168.0.22/"
