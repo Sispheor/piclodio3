@@ -16,7 +16,7 @@ import { ToastService } from '../services/toast.service';
 export class AlarmFormComponent implements OnInit {
 
   webradios: Webradio[];
-  newAlarm: Alarm = new Alarm();
+  newAlarm: Alarm = new Alarm({ enabled: true});
   default_time = { hour: 7, minute: 0 };
   dayOfWeek = [
     { name: 'order 1' },
