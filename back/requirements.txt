@@ -1,6 +1,6 @@
 Django==3.0.14
 django-filter==2.2.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 Markdown==3.2.1
 drf-yasg==1.17.0
 apscheduler==3.6.3
